@@ -1,0 +1,86 @@
+.split-button {
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    &__nodes {
+        background-color: color-mix(in srgb, rgb(var(--color-primary)) 3%, rgb(var(--color-background-tabview)) 97%);
+        border: 1px solid color-mix(in srgb, rgb(var(--color-primary)) 10%, rgb(var(--color-border)) 90%);
+        border-radius: 200px;
+        padding: 0.2em 0;
+        z-index: 0;
+        position: relative;
+
+        &__node {
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            margin: 0 1em;
+            z-index: 2;
+            border: none;
+            background: none;
+            padding: unset;
+            color: rgb(var(--color-text));
+
+            &__status-info {
+                position: absolute;
+                right: 0;
+                top: -50%;
+            }
+
+            &--state-selected {
+                color: rgb(var(--color-primary)) !important;
+                transition: color .3s;
+            }
+        }
+
+        &__node-selector {
+            border: 2px solid transparent;
+            background: transparent;
+            border-radius: 200px;
+            position: absolute;
+            z-index: 1;
+
+            &--state-loaded {
+                border: 2px solid rgb(var(--color-primary));
+                background-color: color-mix(in srgb, rgb(var(--color-primary)) 10%, rgb(var(--color-background-tabview)) 90%);
+                transition: all .3s;
+            }
+        }
+    }
+
+    &--size-small {
+        .split-button__nodes {
+
+            &__node {
+                height: 1.1rem;
+                line-height: 1.1rem;
+                margin: 2px 1em;
+                z-index: 1;
+            }
+
+            &__node-selector {
+                height: calc(1.1rem + .4em + 4px);
+                width: 0px;
+                top: 1px;
+            }
+        }
+    }
+
+    &--size-medium {
+        .split-button__nodes {
+            &__node {
+                height: 1.8rem;
+                line-height: 1.8rem;
+                margin: 2px 1em;
+            }
+
+            &__node-selector {
+                height: calc(1.8rem + .4em + 4px);
+                width: 0px;
+                top: -2px;
+            }
+        }
+    }
+}

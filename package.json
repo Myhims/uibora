@@ -1,9 +1,9 @@
 {
-  "name": "@ubora/wote",
+  "name": "uibora",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
-  "license": "MIT",
+  "license": "Commercial",
   "dependencies": {
     "react": "^19.2.0"
   },

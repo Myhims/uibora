@@ -19,7 +19,7 @@ export default defineConfig({
     build: {
         lib: {
             entry: entries,
-            name: 'UboraComposants',
+            name: 'UiboraComposants',
             fileName: (format) => `index.${format}.js`
         },
         rollupOptions: {

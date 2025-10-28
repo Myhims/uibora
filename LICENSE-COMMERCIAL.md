@@ -1,14 +1,14 @@
-# ubora — Commercial License (Per Organization)
+# uibora — Commercial License (Per Organization)
 
 **Version**: 1.0  
 **Effective Date**: October 28, 2025  
 **Licensor**: Jérémy Beuchot  
-**Contact**: ubora@scroow.com — https://ubora.scroow.com  
+**Contact**: uibora@scroow.com — https://uibora.scroow.com  
 **Governing Law / Venue**: France — Courts of Rennes  
 **License Metric**: Per Organization (one license per legal entity)
 
 ## 1. Definitions
-- **Software**: the software product “ubora” and its documentation delivered by the Licensor under this license.
+- **Software**: the software product “uibora” and its documentation delivered by the Licensor under this license.
 - **Organization**: a single legal entity (including its majority-owned subsidiaries) acting as Licensee.
 - **Internal Use**: use by employees and individual contractors of the Organization for its own business, not for third parties.
 - **Derivative Work**: any work based upon or incorporating the Software, with modifications or additions.
