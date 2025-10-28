@@ -1,0 +1,42 @@
+name: Build and Deploy Storybook
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout du code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Installer Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      # 3. Installer les dépendances
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # 4. Construire Storybook
+      - name: Build Storybook
+        run: yarn build-storybook
+
+      # 5. Déployer via FTPS (TLS explicite sur port 21)
+      - name: Deploy to FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: storybook-static/
+          server-dir: /
+          dangerous-clean-slate: true # supprime les anciens fichiers avant upload
