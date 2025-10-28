@@ -5,7 +5,7 @@
     justify-content: center;
 
     &__nodes {
-        background-color: color-mix(in srgb, rgb(var(--color-primary)) 3%, rgb(var(--color-background-tabview)) 97%);
+        background-color: color-mix(in srgb, rgb(var(--color-primary)) 3%, rgb(var(--color-background-split-button)) 97%);
         border: 1px solid color-mix(in srgb, rgb(var(--color-primary)) 10%, rgb(var(--color-border)) 90%);
         border-radius: 200px;
         padding: 0.2em 0;
@@ -44,7 +44,7 @@
 
             &--state-loaded {
                 border: 2px solid rgb(var(--color-primary));
-                background-color: color-mix(in srgb, rgb(var(--color-primary)) 10%, rgb(var(--color-background-tabview)) 90%);
+                background-color: color-mix(in srgb, rgb(var(--color-primary)) 10%, rgb(var(--color-background-split-button)) 90%);
                 transition: all .3s;
             }
         }
