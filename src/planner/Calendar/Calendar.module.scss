@@ -3,7 +3,14 @@
     margin-top: 1px;
     max-height: 100vh;
     font-family: var(--font-family);
-    color:rgb(var(--color-text));
+    color: rgb(var(--color-text));
+
+    &__mode-selector {
+        display: flex;
+        gap: 1em;
+        justify-content: end;
+        margin-bottom: 1em;
+    }
 
     &__header {
         display: grid;
@@ -51,6 +58,10 @@
 
             &--state-disabled {
                 opacity: .4;
+            }
+
+            &--state-today {
+                background-color: rgba(var(--color-primary), .15);
             }
 
             &__more-event {

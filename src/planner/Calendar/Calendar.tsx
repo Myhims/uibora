@@ -4,13 +4,20 @@ import { WeekDay } from "../../models/WeekDay";
 import s from './Calendar.module.scss';
 import CalendarMonth from "./CalendarMonth";
 import type { CalendarEvent } from "./Models/CalendarEvent";
+import { SplitButtonSize } from "../../buttons/models/SplitButtonSize";
+import SplitButton from "../../buttons/SplitButton";
+import type { MonthCalendarI18n } from "./i18n/MonthCalendarI18n";
+
+type CalendarI18n = MonthCalendarI18n & {};
 
 interface ICalendarProps extends HtmlAttributes<HTMLDivElement> {
     startDayOfWeek?: WeekDay
     defautlDisplayMode?: 'month' | 'week' | 'day'
     startDay?: Date
     calendarEvents?: CalendarEvent[]
+    i18n: CalendarI18n
 }
+
 
 const Calendar = ({
     startDayOfWeek = WeekDay.Sunday,
@@ -18,14 +25,27 @@ const Calendar = ({
     startDay = new Date(),
     calendarEvents = [],
     className,
+    i18n,
     ...props
 }: ICalendarProps) => {
 
     return <div className={clsx(s.calendar, className)}>
+        <div className={s['calendar__mode-selector']}>
+            <SplitButton
+                  activeTab={0}
+                  className="custom"
+                  size={SplitButtonSize.small}
+                >
+                  <SplitButton.Action title="Month" onClick={() => console.log('Month')} />
+                  <SplitButton.Action title="Week" onClick={() => console.log('Week')} />
+                  <SplitButton.Action title="Day" onClick={() => console.log('Day')} />
+                </SplitButton>
+        </div>
         <Calendar.Month
             startDayOfWeek={startDayOfWeek}
             startDay={startDay}
             calendarEvents={calendarEvents}
+            i18n={i18n}
         />
     </div>
 }

@@ -7,18 +7,20 @@ import s from './Calendar.module.scss'
 import { CalendarHelper } from "./CalendarHelper"
 import type { CalendarDay } from "./Models/CalendarDay"
 import type { CalendarEvent } from "./Models/CalendarEvent"
-
+import type { MonthCalendarI18n } from "./i18n/MonthCalendarI18n"
 
 interface ICalendarMonthProps {
     startDayOfWeek: WeekDay
     startDay: Date
     calendarEvents: CalendarEvent[]
+    i18n: MonthCalendarI18n
 }
 
 const CalendarMonth = ({
     startDayOfWeek = WeekDay.Sunday,
     startDay = new Date(),
     calendarEvents = [],
+    i18n
 }: ICalendarMonthProps) => {
     const [calendarInDays, setCalendarInDays] = useState<CalendarDay[][]>();
     const [eventsPortals, setEventsPortals] = useState<React.ReactPortal[]>([]);
@@ -33,9 +35,13 @@ const CalendarMonth = ({
     }, [])
 
     const headerDays = useMemo(() => {
-        const days = CalendarHelper.getWeekDays(startDayOfWeek);
+        const days = CalendarHelper.getWeekDays(startDayOfWeek, i18n);
         return <div className={s.calendar__header}>
-            {days.map(d => { return <div className={s.calendar__header__day}>{d}</div> })}
+            {days.map(d => {
+                return <div className={s.calendar__header__day}>
+                    {d}
+                </div>
+            })}
         </div>
 
     }, [startDayOfWeek])
@@ -96,6 +102,8 @@ const CalendarMonth = ({
     }
 
     const showCalendarDays = useMemo(() => {
+        const today = new Date();
+
         return calendarInDays?.map((weeks, i) => {
             return <div key={`day-${i}`}
                 className={s["calendar__week-line"]}
@@ -107,7 +115,8 @@ const CalendarMonth = ({
                         key={`day-${day.date}-${index}`}
                         className={clsx(
                             s["calendar__week-line__single-day"],
-                            day.isCurrentMonth ? '' : s["calendar__week-line__single-day--state-disabled"]
+                            day.isCurrentMonth ? '' : s["calendar__week-line__single-day--state-disabled"],
+                            day.date?.getDate() === today.getDate() ? s["calendar__week-line__single-day--state-today"] : ''
                         )}>
                         {day.date?.getDate()}
                     </div>

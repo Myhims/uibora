@@ -1,4 +1,5 @@
 import type { WeekDay } from "../../models/WeekDay";
+import type { MonthCalendarI18n } from "./i18n/MonthCalendarI18n";
 import type { CalendarDay } from "./Models/CalendarDay";
 import type { CalendarEvent } from "./Models/CalendarEvent";
 import type { EventSegment } from "./Models/EventSegment";
@@ -6,15 +7,15 @@ import type { EventSegment } from "./Models/EventSegment";
 export class CalendarHelper {
 
 
-    public static getWeekDays(startDay: WeekDay): string[] {
+    public static getWeekDays(startDay: WeekDay, i18n : MonthCalendarI18n): string[] {
         const days = [
-            'Sunday',
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday'
+            i18n.sunday,
+            i18n.monday,
+            i18n.tuesday,
+            i18n.wednesday,
+            i18n.thursday,
+            i18n.friday,
+            i18n.saturday
         ];
 
         // Rotate the array based on the start day
