@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export type SplitButtonTab = {
+export type SplitButtonAction = {
     title: string
     children?: ReactNode
     onClick?: () => void

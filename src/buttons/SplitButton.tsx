@@ -1,13 +1,13 @@
 import clsx from "clsx";
 import React, { HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { SplitButtonSize } from './models/SplitButtonSize';
-import type { SplitButtonTab } from './models/SplitButtonTab';
+import type { SplitButtonAction } from './models/SplitButtonAction';
 import s from './SplitButton.module.scss';
 
 interface SplitButtonProps extends HTMLAttributes<HTMLDivElement> {
     size?: SplitButtonSize
     activeTab?: number
-    children: React.ReactElement<SplitButtonTab> | React.ReactElement<SplitButtonTab>[]
+    children: React.ReactElement<SplitButtonAction> | React.ReactElement<SplitButtonAction>[]
 }
 
 const SplitButton = ({
@@ -22,7 +22,7 @@ const SplitButton = ({
     const [selectedIndex, setSelectedIndex] = useState(activeTab);
     const [readyClass, setReadyClass] = useState('');
 
-    const tabChildren = React.Children.toArray(children) as React.ReactElement<SplitButtonTab>[];
+    const tabChildren = React.Children.toArray(children) as React.ReactElement<SplitButtonAction>[];
 
     const moveSelector = (index: number, doCommand: boolean) => {
         const node = buttonsRefs.current[index];
@@ -77,7 +77,7 @@ const SplitButton = ({
 };
 
 // Compound subcomponent
-const Tab: React.FC<SplitButtonTab> = () => null;
-SplitButton.Tab = Tab;
+const Action: React.FC<SplitButtonAction> = () => null;
+SplitButton.Action = Action;
 
 export default SplitButton;

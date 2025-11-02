@@ -22,9 +22,9 @@ export const Medium: Story = {
       className="custom"
       size={SplitButtonSize.medium}
     >
-      <SplitButton.Tab title="Month" onClick={() => console.log('Month')} />
-      <SplitButton.Tab title="Week" onClick={() => console.log('Week')} />
-      <SplitButton.Tab title="Day" onClick={() => console.log('Day')} />
+      <SplitButton.Action title="Month" onClick={() => console.log('Month')} />
+      <SplitButton.Action title="Week" onClick={() => console.log('Week')} />
+      <SplitButton.Action title="Day" onClick={() => console.log('Day')} />
     </SplitButton>
   ),
 };
@@ -36,9 +36,9 @@ export const Small: Story = {
       className="custom"
       size={SplitButtonSize.small}
     >
-      <SplitButton.Tab title="Month" onClick={() => console.log('Month')} />
-      <SplitButton.Tab title="Week" onClick={() => console.log('Week')} />
-      <SplitButton.Tab title="Day" onClick={() => console.log('Day')} />
+      <SplitButton.Action title="Month" onClick={() => console.log('Month')} />
+      <SplitButton.Action title="Week" onClick={() => console.log('Week')} />
+      <SplitButton.Action title="Day" onClick={() => console.log('Day')} />
     </SplitButton>
   ),
 };
