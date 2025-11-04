@@ -1,16 +1,16 @@
 import clsx from "clsx";
-import type { HtmlAttributes } from "../../../node_modules/csstype/index";
+import type { HtmlHTMLAttributes } from "react";
+import { SplitButtonSize } from "../../buttons/models/SplitButtonSize";
+import SplitButton from "../../buttons/SplitButton";
 import { WeekDay } from "../../models/WeekDay";
 import s from './Calendar.module.scss';
 import CalendarMonth from "./CalendarMonth";
-import type { CalendarEvent } from "./Models/CalendarEvent";
-import { SplitButtonSize } from "../../buttons/models/SplitButtonSize";
-import SplitButton from "../../buttons/SplitButton";
 import type { MonthCalendarI18n } from "./i18n/MonthCalendarI18n";
+import type { CalendarEvent } from "./Models/CalendarEvent";
 
-type CalendarI18n = MonthCalendarI18n & {};
+export type CalendarI18n = MonthCalendarI18n & {};
 
-interface ICalendarProps extends HtmlAttributes<HTMLDivElement> {
+interface ICalendarProps extends HtmlHTMLAttributes<HTMLDivElement> {
     startDayOfWeek?: WeekDay
     defautlDisplayMode?: 'month' | 'week' | 'day'
     startDay?: Date
@@ -32,14 +32,14 @@ const Calendar = ({
     return <div className={clsx(s.calendar, className)}>
         <div className={s['calendar__mode-selector']}>
             <SplitButton
-                  activeTab={0}
-                  className="custom"
-                  size={SplitButtonSize.small}
-                >
-                  <SplitButton.Action title="Month" onClick={() => console.log('Month')} />
-                  <SplitButton.Action title="Week" onClick={() => console.log('Week')} />
-                  <SplitButton.Action title="Day" onClick={() => console.log('Day')} />
-                </SplitButton>
+                activeTab={0}
+                className="custom"
+                size={SplitButtonSize.small}
+            >
+                <SplitButton.Action title="Month" onClick={() => console.log('Month')} />
+                <SplitButton.Action title="Week" onClick={() => console.log('Week')} />
+                <SplitButton.Action title="Day" onClick={() => console.log('Day')} />
+            </SplitButton>
         </div>
         <Calendar.Month
             startDayOfWeek={startDayOfWeek}

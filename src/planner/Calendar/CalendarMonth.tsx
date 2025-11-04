@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { useEffect, useLayoutEffect, useMemo, useState } from "react"
+import { useEffect, useLayoutEffect, useMemo, useState, type ReactNode } from "react"
 import ReactDOM from 'react-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { WeekDay } from "../../models/WeekDay"
@@ -9,7 +9,7 @@ import type { CalendarDay } from "./Models/CalendarDay"
 import type { CalendarEvent } from "./Models/CalendarEvent"
 import type { MonthCalendarI18n } from "./i18n/MonthCalendarI18n"
 
-interface ICalendarMonthProps {
+export interface ICalendarMonthProps {
     startDayOfWeek: WeekDay
     startDay: Date
     calendarEvents: CalendarEvent[]
@@ -47,7 +47,10 @@ const CalendarMonth = ({
     }, [startDayOfWeek])
 
     const monthEvents = (day: CalendarDay, eventsAmountByDay: { day: Number, amount: number }[], maxHeight: number | undefined) => {
-        let events = [];
+        let events : ReactNode[] = [];
+
+        if (calendarInDays === undefined)
+            return events;
 
         const sortedEvents = [...calendarEvents].sort((a, b) => {
             const startedDiff = a.startedOn.getTime() - b.startedOn.getTime();
@@ -58,12 +61,12 @@ const CalendarMonth = ({
         for (let event of sortedEvents) {
             const segments = CalendarHelper.getEventSegments(event, calendarInDays);
             for (let daySeg of segments) {
-                if (daySeg.startUid === day.date?.getDate()) {
+                if (daySeg.startUid === day.date?.getDate() && daySeg.endUid !== null) {
                     const size = (daySeg.endUid - daySeg.startUid + 1);
 
                     let minimalDayAmount = 1;
                     for (let i = 0; i < size; i++) {
-                        const dayAmount = eventsAmountByDay.find(d => d.day === day.date?.getDate() + i);
+                        const dayAmount = eventsAmountByDay.find(d => d.day === (day.date?.getDate() ?? 0 + i));
                         if (dayAmount) {
                             dayAmount.amount++;
                             minimalDayAmount = dayAmount.amount;
@@ -136,7 +139,8 @@ const CalendarMonth = ({
                 const dayCase = document.querySelectorAll(`[data-guid="${dataGuid}"]`);
                 const events = monthEvents(day, eventsAmountByDay, dayCase[0]?.clientHeight);
 
-                newPortals.push(ReactDOM.createPortal(events, dayCase[0]));
+                if (dayCase.length && dayCase[0])
+                    newPortals.push(ReactDOM.createPortal(events, dayCase[0]));
             })
         })
 

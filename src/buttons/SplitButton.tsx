@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import React, { HTMLAttributes, useEffect, useRef, useState } from 'react';
-import { SplitButtonSize } from './models/SplitButtonSize';
+import React, { type HTMLAttributes, useEffect, useRef, useState } from 'react';
 import type { SplitButtonAction } from './models/SplitButtonAction';
+import { SplitButtonSize } from './models/SplitButtonSize';
 import s from './SplitButton.module.scss';
 
 interface SplitButtonProps extends HTMLAttributes<HTMLDivElement> {
@@ -20,7 +20,7 @@ const SplitButton = ({
     const domSelectorNode = useRef<HTMLDivElement>(null);
     const buttonsRefs = useRef<(HTMLButtonElement | null)[]>([]);
     const [selectedIndex, setSelectedIndex] = useState(activeTab);
-    const [readyClass, setReadyClass] = useState('');
+    const [readyClass, setReadyClass] = useState<string | undefined>('');
 
     const tabChildren = React.Children.toArray(children) as React.ReactElement<SplitButtonAction>[];
 

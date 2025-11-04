@@ -18,9 +18,10 @@ export default defineConfig({
     plugins: [react()],
     build: {
         lib: {
-            entry: entries,
-            name: 'UiboraComposants',
-            fileName: (format) => `index.${format}.js`
+            entry: './src/index.ts',
+            name: 'uibora',
+            fileName: (format) => `uibora.${format}.js`,
+            formats: ['es', 'cjs']
         },
         rollupOptions: {
             external: ['react', 'react-dom']

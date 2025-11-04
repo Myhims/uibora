@@ -1,12 +1,25 @@
 {
   "name": "uibora",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "type": "module",
-  "main": "index.js",
   "license": "Commercial",
   "dependencies": {
     "react": "^19.2.0"
   },
+  "main": "dist/uibora.csj.js",
+  "module": "dist/uibora.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/uibora.es.js",
+      "require": "./dist/uibora.cjs.js"
+    },
+    "./uibora.css": "./dist/uibora.css"
+  },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@chromatic-com/storybook": "4.1.1",
     "@storybook/addon-a11y": "9.1.13",
@@ -14,6 +27,7 @@
     "@storybook/addon-vitest": "9.1.13",
     "@storybook/react-vite": "9.1.13",
     "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.0.4",
     "@vitest/browser": "^4.0.2",
     "@vitest/coverage-v8": "^4.0.2",
@@ -26,15 +40,12 @@
     "vite": "^7.1.12",
     "vitest": "^4.0.2"
   },
-  "exports": {
-    ".": "./dist/index.js",
-    "./planner": "./dist/planner/index.js"
-  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build-pack": "yarn build && tsc --emitDeclarationOnly --outDir dist && yarn pack"
   }
 }
