@@ -16,6 +16,11 @@ export interface ICalendarMonthProps {
     i18n: MonthCalendarI18n
 }
 
+type DragAndDropElement = {
+    event: CalendarEvent
+    type: 'drag' | 'resize'
+}
+
 const CalendarMonth = ({
     startDayOfWeek = WeekDay.Sunday,
     startDay = new Date(),
@@ -49,7 +54,7 @@ const CalendarMonth = ({
 
     /* Drag and Drop */
     const handleDragStart = useCallback((e: React.DragEvent<HTMLDivElement>, event: CalendarEvent) => {
-        e.dataTransfer.setData('text/plain', JSON.stringify(event));
+        e.dataTransfer.setData('text/plain', JSON.stringify({ event, type: 'drag' } as DragAndDropElement));
     }, [calendarEventsManaged]);
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -62,12 +67,24 @@ const CalendarMonth = ({
         e.currentTarget.classList.remove(s['calendar__week-line__single-day--state-drag-over'] ?? '');
     };
 
-    const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>, day: CalendarDay) => {
+    //TODO mettre le type dans la data pour savoir si on resize ou déplace
+    const handleDropResize = useCallback((e: React.DragEvent<HTMLDivElement>, day: CalendarDay) => {
         e.preventDefault();
-        const data = e.dataTransfer.getData('text/plain');
-        const newEvents = CalendarHelper.MoveEventOn(JSON.parse(data) as CalendarEvent, day, calendarEventsManaged);
-        setCalendarEventsManaged(newEvents);
+        const data = JSON.parse(e.dataTransfer.getData('text/plain')) as DragAndDropElement;
+        if (data.type === 'drag') {
+            const newEvents = CalendarHelper.MoveEventOn(data.event, day, calendarEventsManaged);
+            setCalendarEventsManaged(newEvents);
+        }
+        else {
+            const newEvents = CalendarHelper.ResizeEventOn(data.event, day, calendarEventsManaged);
+            setCalendarEventsManaged(newEvents);
+        }
         handleDragExit(e);
+    }, [calendarEventsManaged]);
+
+    /* Resize */
+    const handleResizeStart = useCallback((e: React.DragEvent<HTMLDivElement>, event: CalendarEvent) => {
+        e.dataTransfer.setData('text/plain', JSON.stringify({ event, type: 'resize' } as DragAndDropElement));
     }, [calendarEventsManaged]);
 
     /* Events display */
@@ -107,13 +124,19 @@ const CalendarMonth = ({
                     if (maxHeight && ((eventsOfDay + 1) * 25) < maxHeight) {
                         events.push(<div
                             key={`event-${event.title}`}
-                            draggable
-                            onDragStart={(e) => handleDragStart(e, event)}
                             style={{ width: `calc(${size * 100}% - 4px)`, top: `${(eventsOfDay - 1) * 25}px` }}
                             className={s.calendar__event}
                         >
-                            <div className={s.calendar__event__content}>
-                                {event.title}
+                            <div className={s['calendar__event__resizer-left']}
+                                draggable onDragStart={(e) => handleResizeStart(e, event)}
+                            ></div>
+                            <div className={s.calendar__event__content}
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, event)}
+                            >
+                                <div>
+                                    {event.title}
+                                </div>
                             </div>
                         </div>);
                     }
@@ -142,7 +165,7 @@ const CalendarMonth = ({
                     //search events starting today
                     const dandProps = day.isCurrentMonth ? {
                         onDragOver: handleDragOver,
-                        onDrop: (e: React.DragEvent<HTMLDivElement>) => handleDrop(e, day)
+                        onDrop: (e: React.DragEvent<HTMLDivElement>) => handleDropResize(e, day)
                     } : {}
 
                     return <div

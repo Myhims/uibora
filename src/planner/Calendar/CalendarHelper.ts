@@ -158,5 +158,40 @@ export class CalendarHelper {
         return updatedSourceMap;
     }
 
+    public static ResizeEventOn(
+        moveTo: CalendarEvent,
+        day: CalendarDay,
+        sourceMap: CalendarEvent[]
+    ): CalendarEvent[] {
+        if (!day.date) return sourceMap;
+
+        // Search the event from the source
+        const indexToMove = sourceMap.findIndex(e => e.id === moveTo.id);
+        if (indexToMove === -1) return sourceMap;
+
+        const eventToMove = sourceMap[indexToMove];
+
+        if(eventToMove === undefined) return sourceMap;
+
+        // Create the nex start based on the day
+        const newStart = new Date(day.date);
+
+        if(newStart > eventToMove.finishedOn )
+            return sourceMap;
+
+        // Update the event
+        const updatedEvent: CalendarEvent = {
+            ...eventToMove,
+            startedOn: newStart,
+            finishedOn: eventToMove.finishedOn
+        };
+
+        // Rempalce in the list
+        const updatedSourceMap = [...sourceMap];
+        updatedSourceMap[indexToMove] = updatedEvent;
+
+        return updatedSourceMap;
+    }
+
 
 }

@@ -95,15 +95,24 @@
     &__event {
         position: absolute;
         left: 0;
-        background-color: rgba(var(--color-primary), 0.8);
-        color: white;
-        border-radius: 6px;
         padding: 0;
         margin: 2px;
         z-index: 1;
+        display: flex;
+        flex-wrap: nowrap;
+
+        &__resizer-left {
+            cursor: ew-resize;
+            width: 5px;
+            margin-left: -5px;
+        }
 
         &__content {
             padding: .2em;
+            background-color: rgba(var(--color-primary), 0.8);
+            color: white;
+            border-radius: 6px;
+            flex-grow: 1;
         }
     }
 
