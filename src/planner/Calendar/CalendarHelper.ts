@@ -7,7 +7,7 @@ import type { EventSegment } from "./Models/EventSegment";
 export class CalendarHelper {
 
 
-    public static getWeekDays(startDay: WeekDay, i18n : MonthCalendarI18n): string[] {
+    public static getWeekDays(startDay: WeekDay, i18n: MonthCalendarI18n): string[] {
         const days = [
             i18n.sunday,
             i18n.monday,
@@ -120,9 +120,43 @@ export class CalendarHelper {
         });
 
         return segments;
-
-
-
     }
+
+    public static MoveEventOn(
+        moveTo: CalendarEvent,
+        day: CalendarDay,
+        sourceMap: CalendarEvent[]
+    ): CalendarEvent[] {
+        if (!day.date) return sourceMap;
+
+        // Search the event from the source
+        const indexToMove = sourceMap.findIndex(e => e.id === moveTo.id);
+        if (indexToMove === -1) return sourceMap;
+
+        const eventToMove = sourceMap[indexToMove];
+
+        if(eventToMove === undefined) return sourceMap;
+
+        // get event duration
+        const duration = eventToMove.finishedOn.getTime() - eventToMove.startedOn.getTime();
+
+        // Create the nex start based on the day
+        const newStart = new Date(day.date);
+        const newEnd = new Date(newStart.getTime() + duration);
+
+        // Update the event
+        const updatedEvent: CalendarEvent = {
+            ...eventToMove,
+            startedOn: newStart,
+            finishedOn: newEnd
+        };
+
+        // Rempalce in the list
+        const updatedSourceMap = [...sourceMap];
+        updatedSourceMap[indexToMove] = updatedEvent;
+
+        return updatedSourceMap;
+    }
+
 
 }

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Calendar from '../src/planner/Calendar/Calendar';
 import { WeekDay } from '../src/models/WeekDay';
+import Calendar from '../src/planner/Calendar/Calendar';
 
 const meta = {
   title: 'Planner/Calendar',
@@ -13,13 +13,13 @@ const meta = {
   },
   args: {
     calendarEvents: [
-      { startedOn: new Date(2025, 10, 16, 10, 0, 0), finishedOn: new Date(2025, 10, 19, 20, 0, 0), title: 'An event' },
-      { startedOn: new Date(2025, 10, 1, 10, 0, 0), finishedOn: new Date(2025, 10, 1, 20, 0, 0), title: 'Happy birthday' },
-      { startedOn: new Date(2025, 10, 6, 10, 0, 0), finishedOn: new Date(2025, 10, 7, 20, 0, 0), title: 'Training course' },
-      { startedOn: new Date(2025, 10, 7, 10, 0, 0), finishedOn: new Date(2025, 10, 8, 20, 0, 0), title: 'This way' },
-      { startedOn: new Date(2025, 10, 7, 10, 0, 0), finishedOn: new Date(2025, 10, 7, 20, 0, 0), title: 'Rendez-vous' },
-      { startedOn: new Date(2025, 10, 5, 10, 0, 0), finishedOn: new Date(2025, 10, 6, 20, 0, 0), title: 'Scrum' },
-      { startedOn: new Date(2025, 10, 8, 10, 0, 0), finishedOn: new Date(2025, 10, 9, 20, 0, 0), title: 'My stuffs' },
+      { startedOn: new Date(2025, 10, 16, 10, 0, 0), finishedOn: new Date(2025, 10, 19, 20, 0, 0), title: 'An event', id: 'event-1' },
+      { startedOn: new Date(2025, 10, 1, 10, 0, 0), finishedOn: new Date(2025, 10, 1, 20, 0, 0), title: 'Happy birthday', id: 'event-2' },
+      { startedOn: new Date(2025, 10, 6, 10, 0, 0), finishedOn: new Date(2025, 10, 7, 20, 0, 0), title: 'Training course', id: 'event-3' },
+      { startedOn: new Date(2025, 10, 7, 10, 0, 0), finishedOn: new Date(2025, 10, 8, 20, 0, 0), title: 'This way', id: 'event-4' },
+      { startedOn: new Date(2025, 10, 7, 10, 0, 0), finishedOn: new Date(2025, 10, 7, 20, 0, 0), title: 'Rendez-vous', id: 'event-5' },
+      { startedOn: new Date(2025, 10, 5, 10, 0, 0), finishedOn: new Date(2025, 10, 6, 20, 0, 0), title: 'Scrum', id: 'event-6' },
+      { startedOn: new Date(2025, 10, 8, 10, 0, 0), finishedOn: new Date(2025, 10, 9, 20, 0, 0), title: 'My stuffs', id: 'event-7' },
     ],
     i18n: {
       sunday: 'S',
@@ -30,7 +30,7 @@ const meta = {
       friday: 'F',
       saturday: 'S'
     },
-    startDayOfWeek : WeekDay.Monday
+    startDayOfWeek: WeekDay.Monday
   },
 } satisfies Meta<typeof Calendar>;
 

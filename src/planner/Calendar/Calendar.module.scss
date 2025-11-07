@@ -55,6 +55,7 @@
             margin-left: -1px;
             margin-top: -1px;
             font-size: .8em;
+            transition: background-color .3s;
 
             &--state-disabled {
                 opacity: .4;
@@ -73,6 +74,10 @@
                 border-radius: 6px;
                 padding: .25em;
                 font-size: .7em;
+            }
+
+            &--state-drag-over {
+                background-color: rgba(var(--color-primary), 0.3);
             }
         }
 
