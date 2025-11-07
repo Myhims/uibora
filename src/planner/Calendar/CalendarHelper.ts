@@ -93,24 +93,24 @@ export class CalendarHelper {
         weeks.map(week => {
             const realWeek = week.filter(w => w.date !== null);
             let lastWeekDate = realWeek[realWeek.length - 1]?.date;
-            let weekSeg: EventSegment = { startUid: null, endUid: null };
+            let weekSeg: EventSegment = { start: null, end: null };
 
             for (const cell of week) {
                 if (cell.date !== null) {
                     if (cell.date.getDate() == event.startedOn.getDate() || segmentCropped) {
                         //save segment start
-                        weekSeg.startUid = cell.date.getDate()
+                        weekSeg.start = cell.date.getDate()
                         segmentCropped = false;
                     }
                     if (cell.date.getDate() == event.finishedOn.getDate()) {
-                        weekSeg.endUid = cell.date.getDate()
+                        weekSeg.end = cell.date.getDate()
                         segments.push({ ...weekSeg });
                         segmentCropped = false;
                     }
                     //if the segment is not finished, stop it at the end of the week
                     //and start a new one on the following week
-                    if (weekSeg.startUid !== null && weekSeg.endUid === null && lastWeekDate !== null && cell.date.getDate() === lastWeekDate?.getDate()) {
-                        weekSeg.endUid = cell.date.getDate()
+                    if (weekSeg.start !== null && weekSeg.end === null && lastWeekDate !== null && cell.date.getDate() === lastWeekDate?.getDate()) {
+                        weekSeg.end = cell.date.getDate()
                         segments.push({ ...weekSeg });
                         //clear the segment to create a new one
                         segmentCropped = true;

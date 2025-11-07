@@ -1,4 +1,4 @@
 export type EventSegment = {
-    startUid: number | null
-    endUid: number | null
+    start: number | null
+    end: number | null
 };

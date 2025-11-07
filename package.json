@@ -41,9 +41,8 @@
     "vitest": "^4.0.2"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "storybook dev -p 6006",
     "build": "vite build",
-    "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build-pack": "yarn build && tsc --emitDeclarationOnly --outDir dist && yarn pack"

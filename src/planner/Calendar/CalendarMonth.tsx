@@ -61,12 +61,12 @@ const CalendarMonth = ({
         for (let event of sortedEvents) {
             const segments = CalendarHelper.getEventSegments(event, calendarInDays);
             for (let daySeg of segments) {
-                if (daySeg.startUid === day.date?.getDate() && daySeg.endUid !== null) {
-                    const size = (daySeg.endUid - daySeg.startUid + 1);
+                if (daySeg.start === day.date?.getDate() && daySeg.end !== null) {
+                    const size = (daySeg.end - daySeg.start + 1);
 
                     let minimalDayAmount = 1;
                     for (let i = 0; i < size; i++) {
-                        const dayAmount = eventsAmountByDay.find(d => d.day === (day.date?.getDate() ?? 0 + i));
+                        const dayAmount = eventsAmountByDay.find(d => d.day === ((day.date?.getDate() ?? 0) + i));
                         if (dayAmount) {
                             dayAmount.amount++;
                             minimalDayAmount = dayAmount.amount;
