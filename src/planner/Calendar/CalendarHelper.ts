@@ -82,14 +82,24 @@ export class CalendarHelper {
         event: CalendarEvent,
         weeks: CalendarDay[][],
     ): EventSegment[] {
-
-
-        const startOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
-        const endOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 999);
-
         const segments: EventSegment[] = [];
 
         let segmentCropped = false;
+
+        // Get the first visible date in the calendar
+        const firstVisibleDate = weeks[0]?.find(day => day.date !== null)?.date;
+
+        // If the event starts before the first visible date, create a segment starting from the first visible date
+        if (firstVisibleDate && event.startedOn < firstVisibleDate) {
+            const weekSeg: EventSegment = {
+                start: firstVisibleDate.getDate(),
+                end: null, // will be completed later
+            };
+            segments.push(weekSeg);
+            segmentCropped = true; // signal that a segment is in progress
+        }
+
+        // Iterate over each week
         weeks.map(week => {
             const realWeek = week.filter(w => w.date !== null);
             let lastWeekDate = realWeek[realWeek.length - 1]?.date;
@@ -98,21 +108,21 @@ export class CalendarHelper {
             for (const cell of week) {
                 if (cell.date !== null) {
                     if (cell.date.getDate() == event.startedOn.getDate() || segmentCropped) {
-                        //save segment start
+                        // If the current date matches the event start or a segment is in progress, set the start
                         weekSeg.start = cell.date.getDate()
                         segmentCropped = false;
                     }
+                    // If the current date matches the event end, set the end and push the segment
                     if (cell.date.getDate() == event.finishedOn.getDate()) {
                         weekSeg.end = cell.date.getDate()
                         segments.push({ ...weekSeg });
                         segmentCropped = false;
                     }
-                    //if the segment is not finished, stop it at the end of the week
-                    //and start a new one on the following week
+                    // If the segment is not finished by the end of the week, crop it and start a new one next week
                     if (weekSeg.start !== null && weekSeg.end === null && lastWeekDate !== null && cell.date.getDate() === lastWeekDate?.getDate()) {
                         weekSeg.end = cell.date.getDate()
                         segments.push({ ...weekSeg });
-                        //clear the segment to create a new one
+                        // signal that a new segment should start next week
                         segmentCropped = true;
                     }
                 }
@@ -135,7 +145,7 @@ export class CalendarHelper {
 
         const eventToMove = sourceMap[indexToMove];
 
-        if(eventToMove === undefined) return sourceMap;
+        if (eventToMove === undefined) return sourceMap;
 
         // get event duration
         const duration = eventToMove.finishedOn.getTime() - eventToMove.startedOn.getTime();
@@ -158,7 +168,7 @@ export class CalendarHelper {
         return updatedSourceMap;
     }
 
-    public static ResizeEventOn(
+    public static ResizeEventOnFromStart(
         moveTo: CalendarEvent,
         day: CalendarDay,
         sourceMap: CalendarEvent[]
@@ -171,12 +181,14 @@ export class CalendarHelper {
 
         const eventToMove = sourceMap[indexToMove];
 
-        if(eventToMove === undefined) return sourceMap;
+        if (eventToMove === undefined) return sourceMap;
 
-        // Create the nex start based on the day
+        // Create the new start based on the day
         const newStart = new Date(day.date);
+        newStart.setHours(eventToMove.startedOn.getHours());
+        newStart.setMinutes(eventToMove.startedOn.getMinutes());
 
-        if(newStart > eventToMove.finishedOn )
+        if (newStart > eventToMove.finishedOn)
             return sourceMap;
 
         // Update the event
@@ -193,5 +205,54 @@ export class CalendarHelper {
         return updatedSourceMap;
     }
 
+    public static ResizeEventOnFromEnd(
+        moveTo: CalendarEvent,
+        day: CalendarDay,
+        sourceMap: CalendarEvent[]
+    ): CalendarEvent[] {
+        if (!day.date) return sourceMap;
 
+        // Search the event from the source
+        const indexToMove = sourceMap.findIndex(e => e.id === moveTo.id);
+        if (indexToMove === -1) return sourceMap;
+
+        const eventToMove = sourceMap[indexToMove];
+
+        if (eventToMove === undefined) return sourceMap;
+
+        // Create the new end based on the day
+        const newEnd = new Date(day.date);
+        newEnd.setHours(eventToMove.finishedOn.getHours());
+        newEnd.setMinutes(eventToMove.finishedOn.getMinutes());
+
+        if (newEnd < eventToMove.startedOn)
+            return sourceMap;
+
+        // Update the event
+        const updatedEvent: CalendarEvent = {
+            ...eventToMove,
+            startedOn: eventToMove.startedOn,
+            finishedOn: newEnd
+        };
+
+        // Replace in the list
+        const updatedSourceMap = [...sourceMap];
+        updatedSourceMap[indexToMove] = updatedEvent;
+
+        return updatedSourceMap;
+    }
+
+    public static FilterEventsForMonth(
+        events: CalendarEvent[],
+        displayedMonth: Date
+    ): CalendarEvent[] {
+        const monthStart = new Date(displayedMonth.getFullYear(), displayedMonth.getMonth(), 1);
+        const monthEnd = new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() + 1, 0, 23, 59, 59, 999);
+
+        return events.filter(ce =>
+            ce.startedOn <= monthEnd && ce.finishedOn >= monthStart
+        );
+
+
+    }
 }

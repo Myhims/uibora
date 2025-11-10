@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { WeekDay } from '../src/models/WeekDay';
 import Calendar from '../src/planner/Calendar/Calendar';
 
+const currentMonth = new Date().getMonth();
+
 const meta = {
   title: 'Planner/Calendar',
   component: Calendar,
@@ -13,13 +15,14 @@ const meta = {
   },
   args: {
     calendarEvents: [
-      { startedOn: new Date(2025, 10, 16, 10, 0, 0), finishedOn: new Date(2025, 10, 19, 20, 0, 0), title: 'An event', id: 'event-1' },
-      { startedOn: new Date(2025, 10, 1, 10, 0, 0), finishedOn: new Date(2025, 10, 1, 20, 0, 0), title: 'Happy birthday', id: 'event-2' },
-      { startedOn: new Date(2025, 10, 6, 10, 0, 0), finishedOn: new Date(2025, 10, 7, 20, 0, 0), title: 'Training course', id: 'event-3' },
-      { startedOn: new Date(2025, 10, 7, 10, 0, 0), finishedOn: new Date(2025, 10, 8, 20, 0, 0), title: 'This way', id: 'event-4' },
-      { startedOn: new Date(2025, 10, 7, 10, 0, 0), finishedOn: new Date(2025, 10, 7, 20, 0, 0), title: 'Rendez-vous', id: 'event-5' },
-      { startedOn: new Date(2025, 10, 5, 10, 0, 0), finishedOn: new Date(2025, 10, 6, 20, 0, 0), title: 'Scrum', id: 'event-6' },
-      { startedOn: new Date(2025, 10, 8, 10, 0, 0), finishedOn: new Date(2025, 10, 9, 20, 0, 0), title: 'My stuffs', id: 'event-7' },
+      { startedOn: new Date(2025, currentMonth, 16, 10, 0, 0), finishedOn: new Date(2025, currentMonth, 19, 20, 0, 0), title: 'An event', id: 'event-1' },
+      { startedOn: new Date(2025, currentMonth, 1, 10, 0, 0), finishedOn: new Date(2025, currentMonth, 1, 20, 0, 0), title: 'Happy birthday', id: 'event-2' },
+      { startedOn: new Date(2025, currentMonth, 6, 10, 0, 0), finishedOn: new Date(2025, currentMonth, 7, 20, 0, 0), title: 'Training course', id: 'event-3' },
+      { startedOn: new Date(2025, currentMonth, 7, 10, 0, 0), finishedOn: new Date(2025, currentMonth, 8, 20, 0, 0), title: 'This way', id: 'event-4' },
+      { startedOn: new Date(2025, currentMonth, 7, 10, 0, 0), finishedOn: new Date(2025, currentMonth, 7, 20, 0, 0), title: 'Rendez-vous', id: 'event-5' },
+      { startedOn: new Date(2025, currentMonth, 5, 10, 0, 0), finishedOn: new Date(2025, currentMonth, 6, 20, 0, 0), title: 'Scrum', id: 'event-6' },
+      { startedOn: new Date(2025, currentMonth, 8, 10, 0, 0), finishedOn: new Date(2025, currentMonth, 9, 20, 0, 0), title: 'My stuffs', id: 'event-7' },
+      { startedOn: new Date(2025, currentMonth - 1, 28, 10, 0, 0), finishedOn: new Date(2025, currentMonth, 2, 20, 0, 0), title: '2 months long', id: 'event-8' },
     ],
     i18n: {
       sunday: 'S',

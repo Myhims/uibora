@@ -43,7 +43,7 @@ const Calendar = ({
         </div>
         <Calendar.Month
             startDayOfWeek={startDayOfWeek}
-            startDay={startDay}
+            startDate={startDay}
             calendarEvents={calendarEvents}
             i18n={i18n}
         />
