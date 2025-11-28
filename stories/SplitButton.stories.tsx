@@ -3,7 +3,7 @@ import SplitButton from '../src/buttons/SplitButton';
 import { SplitButtonSize } from '../src/buttons/models/SplitButtonSize';
 
 const meta = {
-  title: 'Buttons/SplitButton',
+  title: 'Buttons/Split Button',
   component: SplitButton,
   parameters: {},
   tags: ['autodocs'],

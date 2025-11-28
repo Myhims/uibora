@@ -5,7 +5,7 @@ import Calendar from '../src/planner/Calendar/Calendar';
 const currentMonth = new Date().getMonth();
 
 const meta = {
-  title: 'Planner/Calendar',
+  title: 'Planner/Calendar (WIP)',
   component: Calendar,
   parameters: {
 
