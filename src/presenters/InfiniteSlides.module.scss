@@ -1,0 +1,45 @@
+.infinite-slides {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+
+    &__slide {
+        //flex-shrink: 0;
+        border-radius: 8px;
+        overflow: hidden;
+
+        &__main {
+            flex-basis: 75%;
+        }
+
+        &__new {
+            flex-basis: 25%;
+            margin-left: 1em;
+        }
+
+        &__pop {
+            flex-basis: 0%;
+        }
+    }
+
+    &--state-animating {
+        .infinite-slides__slide {
+            transition: all 0.6s;
+
+            &__main {
+                flex-basis: 0%;
+            }
+
+            &__new {
+                flex-basis: 75%;
+                margin-left: 0;
+            }
+
+            &__pop {
+                flex-basis: 25%;
+                margin-left: 1em;
+            }
+        }
+    }
+}
