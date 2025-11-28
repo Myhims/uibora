@@ -9,7 +9,7 @@ const meta: Meta<typeof Spinner> = {
   argTypes: {
     size: {
       control: { type: 'select' },
-      options: ['small', 'medium', 'big', 'full'],
+      options: ['small', 'medium', 'big'],
     },
   },
 };
