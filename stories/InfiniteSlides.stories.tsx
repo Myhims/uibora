@@ -11,25 +11,28 @@ const meta: Meta<typeof InfiniteSlides> = {
 
 export default meta;
 type Story = StoryObj<typeof InfiniteSlides>;
-
-export const Default: Story = {
-  args: {
-    slides: [<div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/barriere_corail_reunion_.JPG')" }}></div>,
+const Slides = [<div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/barriere_corail_reunion_.JPG')" }}></div>,
     <div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/Volcan_hekla_.JPG')" }}></div>,
     <div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/silice_.JPG')" }}></div>,
     <div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/champignon_.JPG')" }}></div>,
-    ],
+    <div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/coucher_soleil_champs_.JPG')" }}></div>,
+    <div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/islande_fleur_jaune_.JPG')" }}></div>,
+    <div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/Toile_rosee_.JPG')" }}></div>,
+    ]
+
+export const Default: Story = {
+  args: {
+    slides: Slides,
     style: { height: '30dvh', width: '100%' }
   },
 };
 
-export const DelayCustom: Story = {
+export const CustomProps: Story = {
   args: {
-    slides: [<div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/barriere_corail_reunion_.JPG')" }}></div>,
-    <div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/Volcan_hekla_.JPG')" }}></div>,
-    <div style={{ height: '100%', backgroundPosition: 'center', backgroundImage: "url('https://uneimage.fr/photos/champignon_.JPG')" }}></div>,
-    ],
+    slides: Slides,
     delay: 6000,
+    visibleCards: 2,
+    spacing: '5px',
     style: { height: '30dvh', width: '100%' }
   },
 };
