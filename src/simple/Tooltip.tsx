@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 import React, { useEffect, useRef, useState } from 'react';
 import Portal from './Portal';
-import s from './tooltip.module.scss';
+import s from './Tooltip.module.scss';
 
 type Placement = 'top' | 'bottom' | 'left' | 'right';
 
