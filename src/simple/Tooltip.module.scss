@@ -1,0 +1,82 @@
+.tooltip {
+  font-family: var(--font-family);
+  background-color: #333;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  position: fixed;
+  z-index: 99999;
+  pointer-events: none;
+  animation: 1.5s ease-out 0s animation-appear;
+
+  &--state-bottom {
+    &:before {
+      content: "";
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 8px;
+      border-style: solid;
+      border-color: transparent transparent #333 transparent;
+    }
+  }
+
+  &--state-top {
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: -13px; // flèche sous la div
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 8px;
+      border-style: solid;
+      border-color: #333 transparent transparent transparent;
+    }
+  }
+
+  &--state-left {
+    &:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -13px; // flèche à droite
+      transform: translateY(-50%);
+      border-width: 8px;
+      border-style: solid;
+      border-color: transparent transparent transparent #333;
+    }
+  }
+
+  &--state-right {
+    &:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -13px; // flèche à gauche
+      transform: translateY(-50%);
+      border-width: 8px;
+      border-style: solid;
+      border-color: transparent #333 transparent transparent;
+    }
+  }
+}
+
+@keyframes animation-appear {
+  0% {
+    opacity: 0;
+  }
+
+  80% {
+    transform: rotateX(50deg);
+    opacity: 0;
+
+  }
+
+  100% {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+}
