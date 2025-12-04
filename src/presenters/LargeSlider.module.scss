@@ -1,0 +1,78 @@
+%x-button {
+    cursor: pointer;
+    padding: 4px;
+    color: rgb(var(--uib-color-text));
+    transition: opacity .3s;
+}
+
+.large-slider {
+    position: relative;
+    width: 100%;
+
+    &__buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: end;
+
+        &--state-disabled {
+            pointer-events: none;
+            opacity: .2;
+        }
+
+        &__previous {
+            @extend %x-button;
+
+            &.large-slider__buttons__previous--state-hidden {
+                opacity: 0;
+                pointer-events: none;
+                scale: .5;
+            }
+        }
+
+
+        &__next {
+            @extend %x-button;
+
+            &.large-slider__buttons__previous--state-hidden {
+                opacity: 0;
+                pointer-events: none;
+                scale: .5;
+            }
+        }
+    }
+
+
+    &__container {
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: -10px;
+
+        &__content {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 20px; //removed by the component to hide the scrollbar
+            scroll-behavior: smooth;
+
+            &>* {
+                margin-bottom: 15px;
+            }
+
+            &__hidden {
+                min-height: 5px;
+            }
+
+            &__children {
+                display: flex;
+                align-items: flex-start;
+                flex-direction: row;
+                flex-wrap: nowrap;
+            }
+        }
+
+    }
+}
