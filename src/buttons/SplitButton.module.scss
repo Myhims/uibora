@@ -1,12 +1,12 @@
 .split-button {
-    font-family: var(--font-family);
+    font-family: var(--uib-font-family);
     display: flex;
     flex-direction: row;
     justify-content: center;
 
     &__nodes {
-        background-color: color-mix(in srgb, rgb(var(--color-primary)) 3%, rgb(var(--color-background-split-button)) 97%);
-        border: 1px solid color-mix(in srgb, rgb(var(--color-primary)) 10%, rgb(var(--color-border)) 90%);
+        background-color: color-mix(in srgb, rgb(var(--uib-color-primary)) 3%, rgb(var(--uib-color-background-split-button)) 97%);
+        border: 1px solid color-mix(in srgb, rgb(var(--uib-color-primary)) 10%, rgb(var(--uib-color-border)) 90%);
         border-radius: 200px;
         padding: 0.2em 0;
         z-index: 0;
@@ -21,7 +21,7 @@
             border: none;
             background: none;
             padding: unset;
-            color: rgb(var(--color-text));
+            color: rgb(var(--uib-color-text));
 
             &__status-info {
                 position: absolute;
@@ -30,7 +30,7 @@
             }
 
             &--state-selected {
-                color: rgb(var(--color-primary)) !important;
+                color: rgb(var(--uib-color-primary)) !important;
                 transition: color .3s;
             }
         }
@@ -43,8 +43,8 @@
             z-index: 1;
 
             &--state-loaded {
-                border: 2px solid rgb(var(--color-primary));
-                background-color: color-mix(in srgb, rgb(var(--color-primary)) 10%, rgb(var(--color-background-split-button)) 90%);
+                border: 2px solid rgb(var(--uib-color-primary));
+                background-color: color-mix(in srgb, rgb(var(--uib-color-primary)) 10%, rgb(var(--uib-color-background-split-button)) 90%);
                 transition: all .3s;
             }
         }

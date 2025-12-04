@@ -1,5 +1,6 @@
 ﻿import clsx from 'clsx';
 import React, { useEffect, useRef, useState, type JSX, type ReactNode } from 'react';
+import { ColorHelper } from '../../helpers/ColorHelper';
 import DatesHelper from '../../helpers/DatesHelper';
 import Tooltip from '../../simple/Tooltip';
 import s from './DaysSelector.module.scss';
@@ -118,6 +119,11 @@ interface IDaysSelectorProps {
      */
     nextButton?: ReactNode
 
+    /**
+     * Customize the user selection color
+     */    
+    selectionColor?: string
+
 }
 
 export const DaysSelector = ({
@@ -136,7 +142,8 @@ export const DaysSelector = ({
     readonly,
     i18n = { Days: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'], Months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] },
     previousButton = '˅',
-    nextButton = '˄'
+    nextButton = '˄',
+    selectionColor = '#FF9539'
 }: IDaysSelectorProps) => {
     const [startMonth, setStartMonth] = useState<number>(startDate.getMonth());
     const [startYear, setStartYear] = useState<number>(startDate.getFullYear());
@@ -457,6 +464,7 @@ export const DaysSelector = ({
             <div className={clsx(s['days-selector'], readonly ? s['days-selector--state-readonly'] : '')}
                 onMouseEnter={() => captureWhell.current = true}
                 onMouseLeave={() => captureWhell.current = false}
+                style={{['--uib-selection-color' as any]: ColorHelper.HexToRgb(selectionColor)}}
             >
                 {renderHeader()}
                 {renderMonths()}

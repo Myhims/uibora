@@ -5,7 +5,7 @@
         border-top-left-radius: 1em;
 
         &__day {
-            border: 1px solid rgb(var(--color-border));
+            border: 1px solid rgb(var(--uib-color-border));
             margin-left: -1px;
             margin-top: -1px;
             padding: .5em;
@@ -34,11 +34,11 @@
             position: relative;
             padding: .5em;
             aspect-ratio: 3/2;
-            background-color: rgba(var(--color-border), .3);
+            background-color: rgba(var(--uib-color-border), .3);
             display: flex;
             align-items: baseline;
             justify-content: end;
-            border: 1px solid rgb(var(--color-border));
+            border: 1px solid rgb(var(--uib-color-border));
             margin-left: -1px;
             margin-top: -1px;
             font-size: .8em;
@@ -49,14 +49,14 @@
             }
 
             &--state-today {
-                background-color: rgba(var(--color-primary), .15);
+                background-color: rgba(var(--uib-color-primary), .15);
             }
 
             &__more-event {
                 position: absolute;
                 bottom: .2em;
                 right: .2em;
-                background-color: rgba(var(--color-primary), 0.8);
+                background-color: rgba(var(--uib-color-primary), 0.8);
                 color: white;
                 border-radius: 6px;
                 padding: .25em;
@@ -64,7 +64,7 @@
             }
 
             &--state-drag-over {
-                background-color: rgba(var(--color-primary), 0.3);
+                background-color: rgba(var(--uib-color-primary), 0.3);
             }
         }
 
@@ -104,7 +104,7 @@
         &__content {
             cursor: default;
             padding: .2em;
-            background-color: rgba(var(--color-primary), 0.8);
+            background-color: rgba(var(--uib-color-primary), 0.8);
             color: white;
             border-radius: 6px;
             flex-grow: 1;

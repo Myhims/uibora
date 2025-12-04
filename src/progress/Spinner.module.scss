@@ -7,7 +7,7 @@
         width: 24px;
 
         .spinner__external {
-            border: 2px solid rgb(var(--color-primary));
+            border: 2px solid rgb(var(--uib-color-primary));
         }
 
         .spinner__internal {
@@ -21,7 +21,7 @@
         width: 48px;
 
         .spinner__external {
-            border: 3px solid rgb(var(--color-primary));
+            border: 3px solid rgb(var(--uib-color-primary));
         }
 
         .spinner__internal {
@@ -35,14 +35,14 @@
         width: 72px;
 
         .spinner__external {
-            border: 5px solid rgb(var(--color-primary));
+            border: 5px solid rgb(var(--uib-color-primary));
         }
 
         .spinner__internal {
             top: 8px;
             left: 8px;
             width: calc(100% - 10px);
-        border: 2px solid rgb(var(--color-primary));
+        border: 2px solid rgb(var(--uib-color-primary));
         }
     }
 
@@ -62,7 +62,7 @@
         position: absolute;
         aspect-ratio: 1;
         border-radius: 50%;
-        border: 1px solid rgb(var(--color-primary));
+        border: 1px solid rgb(var(--uib-color-primary));
         opacity: .25;
         animation:
             spinner-clip 1.2s infinite linear alternate,

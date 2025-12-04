@@ -1,11 +1,8 @@
-﻿$selection-color: #FF8A23;
-$selection-border-color: #FF9539;
-$day-color: #F2F4F680;
-$border-color: 2px solid $selection-border-color;
+﻿$day-color: #F2F4F680;
 $day-size: 32px;
 
 .days-selector {
-    font-family: var(--font-family);
+    font-family: var(--uib-font-family);
 
     &__year-separator {
         margin-top: 3px;
@@ -18,7 +15,7 @@ $day-size: 32px;
 
         &:hover {
             .days-selector__month__title {
-                background: rgba($selection-color, .4);
+                background: rgba(var(--uib-selection-color), .4);
             }
         }
 
@@ -50,11 +47,11 @@ $day-size: 32px;
             background: $day-color;
             position: relative;
             display: flex;
-            color: rgb(var(--color-text));
+            color: rgb(var(--uib-color-text));
             transition: color .3s;
 
             &:hover {
-                color: $selection-color;
+                color: rgb(var(--uib-selection-color));
             }
 
             &__days-offs {
@@ -89,8 +86,7 @@ $day-size: 32px;
                         position: absolute;
                         top: -2px;
                         right: -2px;
-                        border: 2px solid $border-color;
-                        background: rgb(var(--color-error));
+                        background: rgb(var(--uib-color-error));
                         width: 10px;
                         height: 10px;
                         border-radius: 10px;
@@ -106,7 +102,7 @@ $day-size: 32px;
             }
 
             &--state-off {
-                background: rgb(var(--disabled-color));
+                background: rgb(var(--uib-disabled-color));
                 cursor: not-allowed;
 
                 .days-selector__month__day__select-period {
@@ -118,7 +114,7 @@ $day-size: 32px;
                 }
 
                 &:hover {
-                    color: rgb(var(--color-text));
+                    color: rgb(var(--uib-color-text));
                 }
             }
 
@@ -128,16 +124,16 @@ $day-size: 32px;
             }
 
             &--today {
-                color: rgb(var(--color-primary));
-                background: rgba(var(--color-primary), .15);
+                color: rgb(var(--uib-color-primary));
+                background: rgba(var(--uib-color-primary), .15);
                 font-weight: 550;
             }
 
             &--state-selected {
-                color: var(--color-primary-foreground);
+                color: var(--uib-color-primary-foreground);
 
                 &:hover {
-                    color: rgb(var(--color-text));
+                    color: rgb(var(--uib-color-text));
                 }
             }
 
@@ -166,29 +162,21 @@ $day-size: 32px;
                 margin-left: -1px;
 
                 &--state-select {
-                    border-bottom: $border-color;
-                    border-top: $border-color;
-                    background: $selection-color;
+                    background: rgb(var(--uib-selection-color));
                 }
 
                 &--state-start {
-                    border-bottom: $border-color;
-                    border-left: $border-color;
-                    border-top: $border-color;
-                    background: $selection-color;
+                    background: rgb(var(--uib-selection-color));
                     border-radius: 5px 0 0 5px;
                 }
 
                 &--state-finish {
-                    border-bottom: $border-color;
-                    border-right: $border-color;
-                    border-top: $border-color;
-                    background: $selection-color;
+                    background: rgb(var(--uib-selection-color));
                     border-radius: 0 5px 5px 0;
                 }
 
                 &--state-full {
-                    background: $selection-color;
+                    background: rgb(var(--uib-selection-color));
                     border-radius: 5px;
                 }
 
@@ -197,7 +185,7 @@ $day-size: 32px;
                 }
 
                 &:hover {
-                    background: rgba($selection-color, .4);
+                    background: rgba(var(--uib-selection-color), .4);
                 }
             }
         }
@@ -226,7 +214,7 @@ $day-size: 32px;
             font-size: 16px;
 
             &--today {
-                color: rgb(var(--color-primary));
+                color: rgb(var(--uib-color-primary));
                 font-weight: 650;
             }
         }
@@ -244,11 +232,7 @@ $day-size: 32px;
     }
 
     &.days-selector--state-readonly {
-
-
         .days-selector__month {
-
-
             &:hover {
                 .days-selector__month__title {
                     background: initial;
@@ -256,9 +240,8 @@ $day-size: 32px;
             }
 
             &__day {
-
                 &:hover {
-                    color: rgb(var(--color-text));
+                    color: rgb(var(--uib-color-text));
                 }
 
                 &--state-off {
@@ -268,8 +251,6 @@ $day-size: 32px;
                         color: initial;
                     }
                 }
-
-
 
                 &__select-period {
                     cursor: initial;
