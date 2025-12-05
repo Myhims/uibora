@@ -14,3 +14,5 @@ You can easily customize the look and feel of your application by overriding the
     --uib-disabled-color: 235, 235, 235;                            /* Color for disbaled elements */
 }
 ```
+
+A **dark theme** and a **light theme** are available in the `./theme/m3.scss` file.

@@ -1,0 +1,21 @@
+html[data-theme="light"] {
+    background-color: #ffffff;
+
+    .docs-story {
+        background-color: #ffffff;
+    }
+}
+
+html[data-theme="dark"] {
+    background-color: #1A1B1F;
+
+    .docs-story {
+        background-color: #1A1B1F;
+    }
+}
+
+body,
+#root,
+#storybook-root {
+    background: inherit;
+}

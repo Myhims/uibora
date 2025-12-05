@@ -3,6 +3,10 @@
     padding: 4px;
     color: rgb(var(--uib-color-text));
     transition: opacity .3s;
+
+    svg {
+        fill: rgb(var(--uib-color-text));
+    }
 }
 
 .large-slider {

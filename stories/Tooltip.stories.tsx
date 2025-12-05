@@ -13,11 +13,11 @@ const meta: Meta<typeof Tooltip> = {
 export default meta;
 type Story = StoryObj<typeof Tooltip>;
 
-export const Small: Story = {
+export const Default: Story = {
   args: {
     placement: 'bottom',
-    title: <span>Lorem ipsum<br/>on multiple line<br/><u>With HTML</u></span>,
-    children: <span>Hover me !</span>
+    title: <span>Lorem ipsum<br />on multiple line<br /><u>With HTML</u></span>,
+    children: <span style={{ color: 'rgb(var(--uib-color-text))' }}>Hover me !</span>
   },
 };
 

@@ -3,6 +3,7 @@ $day-size: 32px;
 
 .days-selector {
     font-family: var(--uib-font-family);
+    color: rgb(var(--uib-color-text));
 
     &__year-separator {
         margin-top: 3px;
@@ -228,6 +229,10 @@ $day-size: 32px;
 
         &>div {
             cursor: pointer;
+
+            svg {
+                fill: rgb(var(--uib-color-text));
+            }
         }
     }
 
