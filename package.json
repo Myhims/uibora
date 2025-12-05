@@ -1,6 +1,14 @@
 {
   "name": "uibora",
-  "version": "1.0.2",
+  "version": "1.0.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Myhims/uibora"
+  },
+  "homepage": "https://github.com/Myhims/uibora#readme",
+  "bugs": {
+    "url": "https://github.com/Myhims/uibora/issues"
+  },
   "type": "module",
   "license": "Commercial",
   "dependencies": {
