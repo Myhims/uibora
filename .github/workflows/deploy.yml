@@ -10,25 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout du code
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # 2. Installer Node.js
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      # 3. Installer les dépendances
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      # 4. Construire Storybook
       - name: Build Storybook
         run: yarn build-storybook
 
-      # 5. Déployer via FTPS (TLS explicite sur port 21)
       - name: Deploy to FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
