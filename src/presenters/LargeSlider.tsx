@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { type HTMLAttributes, type ReactNode, useEffect, useRef, useState } from 'react';
+import { type HTMLAttributes, type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { BrowserHelper } from '../helpers/BrowserHelper';
 import s from './LargeSlider.module.scss';
 
@@ -7,7 +7,7 @@ export interface ISliderProps extends HTMLAttributes<HTMLDivElement> {
     /**
      * Hide arrows
      */
-    noArrows?: boolean
+    showNavigationArrows?: 'auto' | 'always' | 'never'
     /**
      * Customize the previous button
      */
@@ -17,14 +17,20 @@ export interface ISliderProps extends HTMLAttributes<HTMLDivElement> {
      * Customize the next button
      */
     nextButton?: ReactNode
+
+    /**
+     * Allow the scrollable area to take up the full screen
+     */
+    allowFullScreenOverflow?: boolean
 }
 
 const Slider = ({
-    noArrows,
+    showNavigationArrows = 'auto',
     className,
     children,
     previousButton = '<',
     nextButton = '>',
+    allowFullScreenOverflow = true,
     ...props }: ISliderProps) => {
     const [scrollAmount, setScrollAmount] = useState(0);
     const [previousButtonVisible, setPreviousButtonVisible] = useState(false);
@@ -34,7 +40,8 @@ const Slider = ({
     const [hiddenAfterElement, setHiddenAfterElement] = useState(Math.round(document.documentElement.clientWidth / 3));
     const sliderRef = useRef<HTMLDivElement>(null);
     const sliderContentRef = useRef<HTMLDivElement>(null);
-    
+    const sliderChildren = useRef<HTMLDivElement>(null);
+
     let _domInterval: any;
     let _updateScroll: any;
     let _scrollTo: any;
@@ -53,19 +60,26 @@ const Slider = ({
 
     const setFullWidthPaddings = (Slider: HTMLElement | null) => {
         if (Slider && Slider.parentElement) {
-            //set the Slider parent container size
-            let offest = window.pageXOffset || document.documentElement.scrollLeft;
-            let marginLeft = Slider.parentElement.getBoundingClientRect().left + offest;
-            let marginRight = document.documentElement.clientWidth - marginLeft - Slider.parentElement.getBoundingClientRect().width;
 
-            Slider.style.width = document.documentElement.clientWidth + 'px';
-            Slider.style.marginLeft = '-' + marginLeft + 'px';
+            if (allowFullScreenOverflow) {
+                //set the Slider parent container size
+                let offest = window.pageXOffset || document.documentElement.scrollLeft;
+                let marginLeft = Slider.parentElement.getBoundingClientRect().left + offest;
+                let marginRight = document.documentElement.clientWidth - marginLeft - Slider.parentElement.getBoundingClientRect().width;
 
-            let stepSize = Math.round(Slider.parentElement.clientWidth * 3 / 4);
+                Slider.style.width = document.documentElement.clientWidth + 'px';
+                Slider.style.marginLeft = '-' + marginLeft + 'px';
 
-            if (hiddenBeforeElement !== marginLeft || hiddenAfterElement != marginRight || stepSize !== stepSize) {
-                setHiddenBeforeElement(marginLeft);
-                setHiddenAfterElement(marginRight);
+                let stepSize = Math.round(Slider.parentElement.clientWidth * 3 / 4);
+
+                if (hiddenBeforeElement !== marginLeft || hiddenAfterElement != marginRight || stepSize !== stepSize) {
+                    setHiddenBeforeElement(marginLeft);
+                    setHiddenAfterElement(marginRight);
+                    setStepSize(stepSize);
+                }
+            }
+            else {
+                let stepSize = Math.round(Slider.parentElement.clientWidth * 3 / 4);
                 setStepSize(stepSize);
             }
         }
@@ -139,7 +153,16 @@ const Slider = ({
 
     const previousButtonState = previousButtonVisible ? '' : s['large-slider__buttons--state-disabled'];
     const nextButtonState = nextButtonVisible ? '' : s['large-slider__buttons--state-disabled'];
-    const showButtons = noArrows !== true && sliderContentRef.current !== null && sliderContentRef.current.scrollWidth > sliderContentRef.current.clientWidth;
+
+    const showButtons = useMemo(() => {
+        if (showNavigationArrows === 'always')
+            return true;
+
+        if (showNavigationArrows === 'never' || (showNavigationArrows === 'auto' && sliderChildren.current && sliderContentRef.current && sliderChildren.current.clientWidth < sliderContentRef.current.clientWidth))
+            return false;
+
+        return showNavigationArrows === 'auto' && sliderContentRef.current !== null && sliderContentRef.current.scrollWidth > sliderContentRef.current.clientWidth;
+    }, [showNavigationArrows, sliderContentRef.current])
 
     return <div {...props} className={clsx(s['large-slider'], className)}>
         {showButtons &&
@@ -156,15 +179,19 @@ const Slider = ({
         }
         <div className={s['large-slider__container']} ref={sliderRef}>
             <div className={s['large-slider__container__content']} ref={sliderContentRef} onScroll={setScrollButtonsVisibility}>
-                <div
-                    className={s['large-slider__container__content__hidden']}
-                    style={{ minWidth: hiddenBeforeElement }} />
-                <div className={s['large-slider__container__content__children']}>
+                {allowFullScreenOverflow &&
+                    <div
+                        className={s['large-slider__container__content__hidden']}
+                        style={{ minWidth: hiddenBeforeElement }} />
+                }
+                <div ref={sliderChildren} className={s['large-slider__container__content__children']}>
                     {children}
                 </div>
-                <div className={s['large-slider__container__content__hidden']}
-                    style={{ minWidth: hiddenAfterElement }}>
-                </div>
+                {allowFullScreenOverflow &&
+                    <div className={s['large-slider__container__content__hidden']}
+                        style={{ minWidth: hiddenAfterElement }}>
+                    </div>
+                }
             </div>
         </div>
     </div >
