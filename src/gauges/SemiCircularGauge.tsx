@@ -1,4 +1,5 @@
 import React, { useEffect, useState, type ReactNode } from "react";
+import { NumberHelper } from "../helpers/NumberHelper";
 import s from './SemiCircularGauge.module.scss';
 import Separators from "./Separators";
 
@@ -57,7 +58,7 @@ const SemiCircularGauge = ({
 }: ISemiCircularGaugeProps) => {
     const [domValue, setDomValue] = useState(0);
     // Clamp value to [0, 100]
-    const pct = Math.max(0, Math.min(100, domValue));
+    const pct = NumberHelper.clamp(domValue, 0, 100);
 
     // Normalized viewBox so math is layout-independent.
     const vbSize = 100;
@@ -87,7 +88,7 @@ const SemiCircularGauge = ({
 
     // needle size and geometry
     const outerRadius = radiusTrack + trackThickness / 2;
-    const needleLen = outerRadius * Math.max(0, Math.min(100, needleLength) / 100);
+    const needleLen = outerRadius * NumberHelper.clamp(needleLength / 100, 0, 100);
     const tipWidth = 0;
     const halfTip = tipWidth / 2;
     const wedgePoints = [

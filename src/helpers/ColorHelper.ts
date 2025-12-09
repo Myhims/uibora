@@ -1,6 +1,7 @@
+import { NumberHelper } from "./NumberHelper";
+import { Stringhelper } from "./StringHelper";
 
 /**
- * ColorHelper.ts
  * Utility class for color conversions.
  */
 export class ColorHelper {
@@ -29,5 +30,48 @@ export class ColorHelper {
         const b = parseInt(hex.substring(4, 6), 16);
 
         return `${r}, ${g}, ${b}`;
+    }
+
+    /**
+     * Computes an HSL color going from red (0%) through yellow (50%) to green (100%).
+     * This uses hue 0..120 with fixed saturation and lightness for good legibility.
+     */
+
+    public static valueToAutoColor(value: number): string {
+        const clamped = NumberHelper.clamp(value, 0, 100);
+        const t = clamped / 100;
+
+        // Hardcoded gamma values
+        const gammaStart = 2; // controls early curve
+        const gammaEnd = 2.5;   // controls late curve
+        const mid = 1;       // pivot point (yellow zone)
+
+        let hueFrac: number;
+        if (t <= mid) {
+            // Early segment: ease-in with gammaStart
+            const normalized = t / mid;
+            hueFrac = Math.pow(normalized, gammaStart) * mid;
+        } else {
+            // Late segment: ease-out with gammaEnd
+            const normalized = (t - mid) / (1 - mid);
+            hueFrac = mid + (1 - Math.pow(1 - normalized, gammaEnd)) * (1 - mid);
+        }
+
+        const hue = 120 * hueFrac; // 0° = red, 120° = green
+        return `hsl(${hue}deg 80% 45%)`;
+    }
+
+    /** Pick contrasting text color based on lightness */
+    public static hslToTextColor({ l }: { h: number; s: number; l: number }): string {
+        return l >= 60 ? "#1a1a1a" : "#ffffff";
+    }
+
+    /** Generate HSL color textes */
+    public static textsToHsl(text: string): { h: number; s: number; l: number } {
+        const base = Stringhelper.stringHash(text);
+        const h = base % 360;
+        const s = 55;
+        const l = 55;
+        return { h, s, l };
     }
 }

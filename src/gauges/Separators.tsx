@@ -1,4 +1,5 @@
 import React, { type JSX } from "react";
+import { NumberHelper } from "../helpers/NumberHelper";
 
 export interface ISeparatorsProps {
     /** Set by the gauge component, leave undefined */
@@ -51,8 +52,8 @@ const Separators: React.FC<ISeparatorsProps> = ({
     const rInner = Math.max(0, rOuter - length);
 
     const ticks: JSX.Element[] = [];
-    const start = Math.max(0, Math.min(100, startPercent));
-    const end = Math.max(0, Math.min(100, endPercent));
+    const start = NumberHelper.clamp(startPercent, 0, 100);
+    const end = NumberHelper.clamp(endPercent, 0, 100);
 
     for (let p = start; p <= end; p += step) {
         if (!includeEnds && (p === start || p === end)) continue;

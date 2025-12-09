@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useEffect, useRef, useState, type HtmlHTMLAttributes, type ReactNode } from 'react';
+import { NumberHelper } from '../helpers/NumberHelper';
 import s from './InfiniteSlides.module.scss';
 
 /**
@@ -19,9 +20,6 @@ interface IInfiniteSlidesProps extends HtmlHTMLAttributes<HTMLDivElement> {
     spacing?: string
 }
 
-
-const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
-
 const InfiniteSlides = ({
     slides = [],
     delay = 4000,
@@ -35,7 +33,7 @@ const InfiniteSlides = ({
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
     const [cardsToShow, setCardsToShow] = useState<number>(2);
-    const visibleCount = clamp(cardsToShow, 1, 7) + 1;
+    const visibleCount = NumberHelper.clamp(cardsToShow, 1, 7) + 1;
 
     useEffect(() => {
         if (slides.length <= 1) {

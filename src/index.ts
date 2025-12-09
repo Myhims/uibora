@@ -6,6 +6,8 @@ export type { CalendarEvent } from './planner/Calendar/Models/CalendarEvent';
 export { default as DaysSelector } from './planner/Schedulder/DaysSelector';
 export { default as InfiniteSlides } from './presenters/InfiniteSlides';
 export { default as LargeSlider } from './presenters/LargeSlider';
+export { default as ProgressBar } from './progress/ProgressBar';
 export { default as Spinner } from './progress/Spinner';
 export { default as Portal } from './simple/Portal';
 export { default as Tooltip } from './simple/Tooltip';
+export { default as UserBubble } from './simple/UserBubble';
