@@ -1,0 +1,31 @@
+.semi-circular-gauge {
+    text {
+        font-family: var(--uib-font-family);
+        color: rgb(var(--uib-color-text));
+        fill: rgb(var(--uib-color-text));
+    }
+
+    &__progress {
+        transition: stroke-dasharray 0.6s ease;
+    }
+
+    &__needle {
+        transform-origin: 50% 100%;
+        transition: transform 0.6s ease;
+    }
+
+    &__text {
+        animation: semi-circular-gauge-clip .6s;
+        transform-origin: 50% 80%;
+    }
+}
+
+@keyframes semi-circular-gauge-clip {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

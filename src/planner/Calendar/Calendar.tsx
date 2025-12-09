@@ -29,7 +29,7 @@ const Calendar = ({
     ...props
 }: ICalendarProps) => {
 
-    return <div className={clsx(s.calendar, className)}>
+    return <div className={clsx(s.calendar, className)} {...props}>
         <div className={s['calendar__mode-selector']}>
             <SplitButton
                 activeTab={0}
