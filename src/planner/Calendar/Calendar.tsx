@@ -50,5 +50,6 @@ const Calendar = ({
     </div>
 }
 
-Calendar.Month = CalendarMonth
+Calendar.Month = CalendarMonth;
+(Calendar.Month as any).displayName = 'Calendar.Month';
 export default Calendar;

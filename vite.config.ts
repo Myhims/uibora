@@ -13,7 +13,7 @@ function buildLibEntries() {
 
   const entries: Record<string, string> = {};
   for (const file of matches) {
-    const dir = path.basename(path.dirname(file)); 
+    const dir = path.basename(path.dirname(file));
     entries[dir] = file;
   }
 
@@ -34,7 +34,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: autoEntries,
-      fileName: (format) => (format === 'cjs' ? `uib.${'[name]'}.cjs` : `uib.${'[name]'}.js`),
+      fileName: (format) => `uib.${'[name]'}.${format}`,
       formats: ['es', 'cjs']
     },
     cssCodeSplit: true,

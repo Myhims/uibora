@@ -32,8 +32,14 @@ export interface ISemiCircularGaugeProps {
     needleLength?: number
     /** separators */
     separators?: React.ReactElement<ISeparatorsProps>
-    /** Text */
-    text?: string
+    /** 
+     * Optional text suffix displayed after the numeric value.
+     * - When `undefined`: no text is shown.
+     * - When a non-empty string: the suffix is appended after the value.
+     * - When `""` (empty string): only the value is displayed (no extra text).
+     */
+    textSuffix?: string;
+
     /** Text size */
     textSize?: number
 }
@@ -53,7 +59,7 @@ const SemiCircularGauge = ({
     needleColor = "rgb(var(--uib-color-primary))",
     needleThickness = 2,
     separators,
-    text,
+    textSuffix,
     textSize = 16
 }: ISemiCircularGaugeProps) => {
     const [domValue, setDomValue] = useState(0);
@@ -66,7 +72,8 @@ const SemiCircularGauge = ({
     const cy = 50;
 
     // Outer radius for the track; leave padding so stroke doesn't clip.
-    const padding = 2;
+    const maxStroke = Math.max(progressThickness, trackThickness);
+    const padding = Math.ceil(maxStroke / 2) + 1;
     const radiusTrack = 45 - padding;
 
     // Progress is drawn slightly inside to mimic the “double arc” look.
@@ -77,7 +84,10 @@ const SemiCircularGauge = ({
 
     // Normalize dash math with pathLength=100 -> full arc length == 100 units.
     const pathLength = 100;
-    const dashArrayProgress = `${pct} ${pathLength - pct}`;
+
+    // add a tiny gap (+1) ONLY when rounded caps are enabled to avoid Chromium end-dot
+    // This keeps Firefox rendering identical and preserves strict behavior when roundedCaps = false.
+    const dashArrayProgress = `${pct} ${pathLength - pct + (roundedCaps ? 1 : 0)}`;
 
     // Rounded caps look better for progress
     const lineCap = roundedCaps ? "round" : "butt";
@@ -106,18 +116,39 @@ const SemiCircularGauge = ({
         : null;
 
 
+
     useEffect(() => {
-        // Delay to let CSS see an initial state
-        const t = setTimeout(() => setDomValue(value), 1);
-        return () => clearTimeout(t);
-    }, [value]);
+        let rafId = 0;
+        const duration = 600; // ms
+        const start = performance.now();
+
+        const from = NumberHelper.clamp(domValue, 0, 100);
+        const to = NumberHelper.clamp(value, 0, 100);
+
+        // EaseInOutCubic for a smooth feel
+        const ease = (t: number) =>
+            t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+        const step = (now: number) => {
+            const elapsed = now - start;
+            const p = Math.min(1, elapsed / duration);
+            const next = from + (to - from) * ease(p);
+            setDomValue(next); // updates the rendered pct
+
+            if (p < 1) rafId = requestAnimationFrame(step);
+        };
+
+        rafId = requestAnimationFrame(step);
+        return () => cancelAnimationFrame(rafId);
+    }, [value]); // <- only when target value changes
+
 
     return (
         <svg
             className={s['semi-circular-gauge']}
             width={width}
-            height={height}
-            viewBox={`0 0 ${vbSize} ${vbSize / 2}`}
+            height={height + maxStroke}
+            viewBox={`0 ${maxStroke / 2.5} ${vbSize} ${vbSize / 2}`}
             role="img"
             aria-label={`${ariaLabel}: ${pct}%`}
         >
@@ -133,16 +164,14 @@ const SemiCircularGauge = ({
 
             {/* Progress (inner semi-circle) */}
             <path
-                className={s['semi-circular-gauge__progress']}
                 d={arcPath(radiusProgress)}
                 fill="none"
                 stroke={color}
                 strokeWidth={progressThickness}
                 strokeLinecap={lineCap}
                 pathLength={pathLength}
-                // Show only pct% of the arc
                 strokeDasharray={dashArrayProgress}
-                strokeDashoffset={0}
+                strokeDashoffset={roundedCaps ? 0.5 : -.5}
             />
 
             {/* Needle */}
@@ -161,25 +190,24 @@ const SemiCircularGauge = ({
 
             {separatorsClone !== null && <>
                 {separatorsClone}
-            </>
-            }
-            {text &&
-                <text
-                    className={s["semi-circular-gauge__text"]}
-                    x="50"
-                    y="70%"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontWeight="bold"
-                    fontSize={textSize}
-                >
-                    {text}
-                </text>
-            }
+            </>}
+
+            {textSuffix !== undefined && <text
+                className={s["semi-circular-gauge__text"]}
+                x="50"
+                y="70%"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fontWeight="bold"
+                fontSize={textSize}
+            >
+                {Math.round(domValue)}{textSuffix}
+            </text>}
 
         </svg>
     );
 };
 
 SemiCircularGauge.Separators = Separators;
+(SemiCircularGauge.Separators as any).displayName = 'SemiCircularGauge.Separators';
 export default SemiCircularGauge;

@@ -69,27 +69,24 @@ export const UserBubble = ({
 
     const ariaLabel = `${firstName} ${lastName}${imageSrc ? "" : ` (${getInitials(firstName, lastName)})`}`;
 
-    return (
-        <div
-            className={clsx(s["user-bubble"], withRing ? s["user-bubble--ring"] : '')}
-            style={styleVars}
-            role="img"
-            aria-label={ariaLabel}
-            title={ariaLabel}
-            {...props}
-        >
-            {imageSrc ? (
-                <div
-                    style={{ backgroundImage: `url('${imageSrc}')` }}
-                    className={s["user-bubble__img-src"]}
-                />
-            ) : (
-                <span className={s["user-bubble__initials"]}>
-                    {getInitials(firstName, lastName)}
-                </span>
-            )}
-        </div>
-    );
+    return <div
+        className={clsx(s["user-bubble"], withRing ? s["user-bubble--ring"] : '')}
+        style={styleVars}
+        role="img"
+        aria-label={ariaLabel}
+        {...props}
+    >
+        {imageSrc ? (
+            <div
+                style={{ backgroundImage: `url('${imageSrc}')` }}
+                className={s["user-bubble__img-src"]}
+            />
+        ) : (
+            <span className={s["user-bubble__initials"]}>
+                {getInitials(firstName, lastName)}
+            </span>
+        )}
+    </div>
 };
 
 export default UserBubble;

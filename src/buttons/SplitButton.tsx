@@ -79,5 +79,6 @@ const SplitButton = ({
 // Compound subcomponent
 const Action: React.FC<SplitButtonAction> = () => null;
 SplitButton.Action = Action;
+(SplitButton.Action as any).displayName = 'SplitButton.Action';
 
 export default SplitButton;

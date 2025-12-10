@@ -18,6 +18,13 @@ export const Default: Story = {
     },
 };
 
+export const Bold: Story = {
+    args: {
+        value: 75,
+        trackThickness: 2,
+        progressThickness: 8
+    },
+};
 
 export const Separated: Story = {
     args: {
@@ -29,7 +36,7 @@ export const Separated: Story = {
     },
 };
 
-export const Inside: Story = {
+export const TextInside: Story = {
     args: {
         value: 75,
         inset: 0,
@@ -38,7 +45,7 @@ export const Inside: Story = {
         roundedCaps: false,
         color: 'green',
         trackColor: '#ccc',
-        text: '75%'
+        textSuffix: '%'
     },
 };
 
@@ -72,6 +79,8 @@ export const Counter: Story = {
         needleShow: true,
         needleLength: 70,
         needleColor: '#3cca3cff',
-        separators: <SemiCircularGauge.Separators color='#1c701cff' lineCap='butt' inset={6} length={10} thickness={.5}/>
+        separators: <SemiCircularGauge.Separators color='#1c701cff' lineCap='butt' inset={6} length={10} thickness={.5}/>,
+        textSuffix: 'km/h',
+        textSize: 5
     },
 };

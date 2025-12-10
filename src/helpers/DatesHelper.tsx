@@ -65,7 +65,7 @@ export default class DatesHelper {
         newDate.setHours(newDate.getHours() + hours);
         return newDate;
     }
-    
+
     public static addDays(date: Date, days: number): Date {
         const newDate = new Date(date.getTime());
         newDate.setDate(newDate.getDate() + days);
@@ -201,5 +201,20 @@ export default class DatesHelper {
         const month = date.getMonth(); // 0-based
         // Create a date for the first day of the next month, then go back one day
         return new Date(year, month + 1, 0).getDate();
+    }
+
+    /**
+     * Returns a human readable date formated from local browser configuration
+     * @param date The base date
+     */
+    public static toShortLocale(date: Date): string {
+        return new Intl.DateTimeFormat(undefined, {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        }).format(date);
     }
 }

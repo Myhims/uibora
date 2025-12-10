@@ -2,7 +2,9 @@ import clsx from "clsx"
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState, type ReactNode } from "react"
 import ReactDOM from 'react-dom'
 import { v4 as uuidv4 } from 'uuid'
+import DatesHelper from "../../helpers/DatesHelper"
 import { WeekDay } from "../../models/WeekDay"
+import { Tooltip } from "../../simple"
 import { CalendarHelper } from "./CalendarHelper"
 import s from './CalendarMonth.module.scss'
 import type { CalendarDay } from "./Models/CalendarDay"
@@ -147,9 +149,15 @@ const CalendarMonth = ({
                                 draggable
                                 onDragStart={(e) => handleDragStart(e, event)}
                             >
-                                <div>
+                                <Tooltip title={<>
                                     {event.title}
-                                </div>
+                                    <br />
+                                    [{`${DatesHelper.toShortLocale(event.startedOn)} ➡️ ${DatesHelper.toShortLocale(event.finishedOn)}]`}
+                                </>}>
+                                    <div>
+                                        {event.title}
+                                    </div>
+                                </Tooltip>
                             </div>
                             <div className={s['calendar-month__event__resizer-right']}
                                 draggable onDragStart={(e) => handleResizeEnd(e, event)}
