@@ -1,30 +1,49 @@
 import react from '@vitejs/plugin-react';
-import { glob } from 'glob';
+import { globSync } from 'glob';
 import path from 'path';
 import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
+function buildLibEntries() {
+  const matches = globSync('src/*/index.ts', {
+    nodir: true,
+    absolute: false,
+  });
 
-const entries = Object.fromEntries(
-  glob.sync('src/**/index.ts').map(file => {
-    const name = file
-      .replace('src/', '')
-      .replace('/index.ts', '');
-    return [name, path.resolve(__dirname, file)];
-  })
-);
+  const entries: Record<string, string> = {};
+  for (const file of matches) {
+    const dir = path.basename(path.dirname(file)); 
+    entries[dir] = file;
+  }
 
+  return entries;
+}
+
+const autoEntries = buildLibEntries();
 
 export default defineConfig({
-    plugins: [react()],
-    build: {
-        lib: {
-            entry: './src/index.ts',
-            name: 'uibora',
-            fileName: (format) => `uibora.${format}.js`,
-            formats: ['es', 'cjs']
-        },
-        rollupOptions: {
-            external: ['react', 'react-dom']
-        }
+  plugins: [react(),
+  libInjectCss(),
+  dts({
+    insertTypesEntry: true,
+    outDir: 'dist/types',
+    exclude: ['**/*.stories.*', '**/*.test.*']
+  })
+  ],
+  build: {
+    lib: {
+      entry: autoEntries,
+      fileName: (format) => (format === 'cjs' ? `uib.${'[name]'}.cjs` : `uib.${'[name]'}.js`),
+      formats: ['es', 'cjs']
+    },
+    cssCodeSplit: true,
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+      output: {
+        assetFileNames: 'uib.asset.[name][extname]',
+      },
+
     }
+  }
 });

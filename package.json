@@ -1,6 +1,6 @@
 {
   "name": "uibora",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/Myhims/uibora"
@@ -11,22 +11,44 @@
   },
   "type": "module",
   "license": "Commercial",
-  "dependencies": {
-    "react": "^19.2.0"
+  "peerDependencies": {
+    "react": "^18 || ^19"
   },
-  "main": "dist/uibora.csj.js",
-  "module": "dist/uibora.es.js",
-  "types": "dist/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/uibora.es.js",
-      "require": "./dist/uibora.cjs.js"
+    "./buttons": {
+      "types": "./dist/types/buttons/index.d.ts",
+      "import": "./dist/uib.buttons.js",
+      "require": "./dist/uib.buttons.cjs"
     },
-    "./uibora.css": "./dist/uibora.css"
+    "./gauge": {
+      "types": "./dist/types/gauge/index.d.ts",
+      "import": "./dist/uib.gauge.js",
+      "require": "./dist/uib.gauge.cjs"
+    },
+    "./planner": {
+      "types": "./dist/types/planner/index.d.ts",
+      "import": "./dist/uib.planner.js",
+      "require": "./dist/uib.planner.cjs"
+    },
+    "./presenters": {
+      "types": "./dist/types/presenters/index.d.ts",
+      "import": "./dist/uib.presenters.js",
+      "require": "./dist/uib.presenters.cjs"
+    },
+    "./progress": {
+      "types": "./dist/types/progress/index.d.ts",
+      "import": "./dist/uib.progress.js",
+      "require": "./dist/uib.progress.cjs"
+    },
+    "./simple": {
+      "types": "./dist/types/simple/index.d.ts",
+      "import": "./dist/uib.simple.js",
+      "require": "./dist/uib.simple.cjs"
+    }
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE*"
   ],
   "devDependencies": {
     "@chromatic-com/storybook": "4.1.1",
@@ -42,11 +64,14 @@
     "@vitest/coverage-v8": "^4.0.2",
     "clsx": "^2.1.1",
     "playwright": "^1.56.1",
+    "react": "^19.2.1",
     "sass": "^1.93.2",
     "storybook": "^9.1.13",
     "typescript": "^5.9.3",
     "uuid": "^13.0.0",
     "vite": "^7.1.12",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lib-inject-css": "^2.2.2",
     "vitest": "^4.0.2"
   },
   "scripts": {

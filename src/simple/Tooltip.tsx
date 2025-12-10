@@ -68,8 +68,8 @@ const Tooltip: React.FC<TooltipProps> = ({
     }, [placement, title, visible]);
 
     // Inject handlers and ref into child
-    const childWithProps = React.cloneElement(children, {
-        ref: triggerRef,
+    const childWithProps = React.cloneElement(children as React.ReactElement<any>, {
+        ref: triggerRef as React.Ref<any>,
         onMouseEnter: () => setVisible(true),
         onMouseLeave: () => setVisible(false),
     });

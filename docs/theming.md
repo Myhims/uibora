@@ -15,4 +15,4 @@ You can easily customize the look and feel of your application by overriding the
 }
 ```
 
-A **dark theme** and a **light theme** are available in the `./theme/m3.scss` file.
+A **dark theme** and a **light theme** are available in the `./theme/uib-m3.scss` file.

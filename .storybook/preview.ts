@@ -1,6 +1,6 @@
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react-vite';
-import '../src/theme/m3.scss';
+import '../src/theme/uib-m3.scss';
 import './preview.scss';
 
 const preview: Preview = {

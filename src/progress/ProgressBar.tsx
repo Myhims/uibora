@@ -55,7 +55,7 @@ export const ProgressBar = ({
         aria-label={ariaLabel}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-valuenow={`${clamped}%`}
+        aria-valuenow={clamped}
     >
         <div className={s['progress-bar__fill']}
             style={{

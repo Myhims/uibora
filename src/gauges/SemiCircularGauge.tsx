@@ -1,7 +1,7 @@
-import React, { useEffect, useState, type ReactNode } from "react";
+import React, { useEffect, useState } from "react";
 import { NumberHelper } from "../helpers/NumberHelper";
 import s from './SemiCircularGauge.module.scss';
-import Separators from "./Separators";
+import Separators, { type ISeparatorsProps } from "./Separators";
 
 export interface ISemiCircularGaugeProps {
     /** Current value in [0, 100] */
@@ -31,7 +31,7 @@ export interface ISemiCircularGaugeProps {
     /** Needle length in percent */
     needleLength?: number
     /** separators */
-    separators?: ReactNode
+    separators?: React.ReactElement<ISeparatorsProps>
     /** Text */
     text?: string
     /** Text size */
@@ -102,7 +102,7 @@ const SemiCircularGauge = ({
     const angleDeg = 180 - (180 * pct) / 100;
 
     const separatorsClone = separators && React.isValidElement(separators) && (separators.type === SemiCircularGauge.Separators)
-        ? React.cloneElement(separators, { cx, cy, outerRadius })
+        ? React.cloneElement<ISeparatorsProps>(separators, { cx, cy, outerRadius })
         : null;
 
 
