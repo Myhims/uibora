@@ -5,8 +5,18 @@ import { SplitButtonSize } from '../src/buttons/models/SplitButtonSize';
 const meta = {
   title: 'Buttons/Split Button',
   component: SplitButton,
-  parameters: {},
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      source: {
+        transform: (source: string) => {
+          const importLine = `import SplitButton, { SplitButtonSize } from 'uibora/buttons';`;
+          return source.includes('import SplitButton') ? source : `${importLine}\n\n${source}`;
+        },
+        language: 'tsx',
+      },
+    },
+  },
   argTypes: {},
   args: {},
 } satisfies Meta<typeof SplitButton>;

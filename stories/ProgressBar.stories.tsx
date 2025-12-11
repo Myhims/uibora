@@ -6,6 +6,17 @@ const meta: Meta<typeof ProgressBar> = {
   title: 'Progress/Progress Bar',
   component: ProgressBar,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      source: {
+        transform: (source: string) => {
+          const importLine = `import ProgressBar from 'uibora/progress';`;
+          return source.includes('import ProgressBar') ? source : `${importLine}\n\n${source}`;
+        },
+        language: 'tsx',
+      },
+    },
+  },
 };
 export default meta;
 

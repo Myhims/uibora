@@ -31,7 +31,7 @@ or
 yarn add uibora
 ```
 
-# Usage :
+# Usage
 Here is a basic example of how to use uibora in your project:
 ```
 import { Spinner } from 'uibora/progress';

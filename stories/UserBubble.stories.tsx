@@ -6,6 +6,17 @@ const meta: Meta<typeof UserBubble> = {
   title: 'Simple/User Bubble',
   component: UserBubble,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      source: {
+        transform: (source: string) => {
+          const importLine = `import UserBubble from 'uibora/simple';`;
+          return source.includes('import UserBubble') ? source : `${importLine}\n\n${source}`;
+        },
+        language: 'tsx',
+      },
+    },
+  },
   argTypes: {
     size: {
       control: { type: 'select' },
@@ -36,13 +47,13 @@ export const Many: Story = {
   render: (args) => {
 
     return <div style={{ display: 'flex', gap: '1em', alignItems: 'end' }}>
-      <UserBubble firstName='Paola' lastName='Smith'  size={UserBubbleSize.xxl} imageSrc='https://uneimage.fr/photos/abeille_.JPG' />
-      <UserBubble firstName='Rachel' lastName='Holloway'  size={UserBubbleSize.xxl} withRing />
-      <UserBubble firstName='Gordon' lastName='Griffin'  size={UserBubbleSize.xxl} />
+      <UserBubble firstName='Paola' lastName='Smith' size={UserBubbleSize.xxl} imageSrc='https://uneimage.fr/photos/abeille_.JPG' />
+      <UserBubble firstName='Rachel' lastName='Holloway' size={UserBubbleSize.xxl} withRing />
+      <UserBubble firstName='Gordon' lastName='Griffin' size={UserBubbleSize.xxl} />
       <UserBubble firstName='Wendy' lastName='Copeland' size={UserBubbleSize.xl} />
       <UserBubble firstName='Victoria' lastName='Jefferson' size={UserBubbleSize.l} />
       <UserBubble firstName='Gavin' lastName='Nolan' size={UserBubbleSize.m} />
-      <UserBubble firstName='Lola' lastName='Carrey' size={UserBubbleSize.m} withRing/>
+      <UserBubble firstName='Lola' lastName='Carrey' size={UserBubbleSize.m} withRing />
       <UserBubble firstName='Carl' lastName='Brock' size={UserBubbleSize.s} />
       <UserBubble firstName='Abigail' lastName='Estrada' size={UserBubbleSize.xs} />
     </div>

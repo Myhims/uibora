@@ -12,6 +12,17 @@ const meta: Meta<typeof Spinner> = {
       options: ['small', 'medium', 'big'],
     },
   },
+  parameters: {
+    docs: {
+      source: {
+        transform: (source: string) => {
+          const importLine = `import Spinner from 'uibora/progress';`;
+          return source.includes('import Spinner') ? source : `${importLine}\n\n${source}`;
+        },
+        language: 'tsx',
+      },
+    },
+  }
 };
 
 export default meta;

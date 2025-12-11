@@ -5,6 +5,17 @@ const meta: Meta<typeof LargeSlider> = {
   title: 'Presenters/Large Slider',
   component: LargeSlider,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      source: {
+        transform: (source: string) => {
+          const importLine = `import LargeSlider from 'uibora/presenters';`;
+          return source.includes('import LargeSlider') ? source : `${importLine}\n\n${source}`;
+        },
+        language: 'tsx',
+      },
+    },
+  },
   argTypes: {
   },
 };

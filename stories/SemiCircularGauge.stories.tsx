@@ -5,6 +5,17 @@ const meta: Meta<typeof SemiCircularGauge> = {
     title: 'Gauges/Semi Circular',
     component: SemiCircularGauge,
     tags: ['autodocs'],
+    parameters: {
+        docs: {
+            source: {
+                transform: (source: string) => {
+                    const importLine = `import SemiCircularGauge from 'uibora/gauges';`;
+                    return source.includes('import SemiCircularGauge') ? source : `${importLine}\n\n${source}`;
+                },
+                language: 'tsx',
+            },
+        },
+    },
     argTypes: {
     },
 };
@@ -79,7 +90,7 @@ export const Counter: Story = {
         needleShow: true,
         needleLength: 70,
         needleColor: '#3cca3cff',
-        separators: <SemiCircularGauge.Separators color='#1c701cff' lineCap='butt' inset={6} length={10} thickness={.5}/>,
+        separators: <SemiCircularGauge.Separators color='#1c701cff' lineCap='butt' inset={6} length={10} thickness={.5} />,
         textSuffix: 'km/h',
         textSize: 5
     },

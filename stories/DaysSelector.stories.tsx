@@ -6,6 +6,17 @@ const meta: Meta<typeof DaysSelector> = {
   title: 'Planner/Days Selector',
   component: DaysSelector,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      source: {
+        transform: (source: string) => {
+          const importLine = `import DaysSelector from 'uibora/planner';`;
+          return source.includes('import DaysSelector') ? source : `${importLine}\n\n${source}`;
+        },
+        language: 'tsx',
+      },
+    },
+  },
   argTypes: {
   },
 };

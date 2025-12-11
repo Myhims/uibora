@@ -8,7 +8,15 @@ const meta = {
   title: 'Planner/Calendar (WIP)',
   component: Calendar,
   parameters: {
-
+    docs: {
+      source: {
+        transform: (source: string) => {
+          const importLine = `import Calendar from 'uibora/planner';`;
+          return source.includes('import Calendar') ? source : `${importLine}\n\n${source}`;
+        },
+        language: 'tsx',
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {
