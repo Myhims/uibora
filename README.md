@@ -9,7 +9,7 @@ This project is dual-licensed under:
 MIT License – for open-source and personal projects.
 Commercial License – for proprietary or commercial use.
 
-See `./LICENSE.md` for details.
+See [LICENSE](LICENSE.md) for details.
 
 # Demos
 See https://uibora.scroow.com for live demos
