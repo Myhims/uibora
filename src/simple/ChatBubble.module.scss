@@ -1,0 +1,52 @@
+.chat-bubble {
+    --background-color-bubble: rgba(var(--uib-color-background-panel), .08);
+    font-family: var(--uib-font-family);
+    color: rgb(var(--uib-color-text));
+    display: flex;
+    gap: .5em;
+    margin: .25em 0;
+
+    &--position-left {
+        justify-content: left;
+        flex-direction: row;
+
+        .chat-bubble__content {
+            border-top-left-radius: 0;
+        }
+    }
+
+    &--position-right {
+        justify-content: right;
+        flex-direction: row-reverse;
+
+        .chat-bubble__content {
+            border-top-right-radius: 0;
+        }
+    }
+
+    &__user {
+        flex-shrink: 0;
+    }
+
+    &__content {
+        border-radius: 8px;
+        padding: 1em;
+        background: var(--background-color-bubble);
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+
+        &__user-info {
+            display: flex;
+            font-weight: 600;
+            align-items: baseline;
+            gap: .5em;
+
+            &__date {
+                font-weight: 200;
+                font-size: .75em;
+                cursor: default;
+            }
+        }
+    }
+}

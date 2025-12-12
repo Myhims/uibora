@@ -1,3 +1,9 @@
+export type TimeUnit = "minute" | "hour" | "day" | "date" | "now";
+
+export interface HumanReadableTime {
+  value: number | string;
+  unit: TimeUnit;
+}
 
 
 export default class DatesHelper {
@@ -217,4 +223,59 @@ export default class DatesHelper {
             hour12: false
         }).format(date);
     }
+
+    /**
+   * Returns an object containing a value and a unit representing the elapsed time.
+   * Rules:
+   * - < 1 minute or future date => { value: 0, unit: "now" }
+   * - < 60 minutes => { value: minutes, unit: "minute" }
+   * - < 24 hours   => { value: hours, unit: "hour" }
+   * - <= 10 days   => { value: days, unit: "day" }
+   * - > 10 days    => { value: localized date string, unit: "date" }
+   *
+   * @param date The past date to compare to now.
+   * @param locale Optional locale used when unit is "date" (default: "fr-FR").
+   */
+  public static toHumanReadableTime(date: Date): HumanReadableTime {
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+
+    // Handle future dates or sub-minute deltas
+    if (diffMs <= 0) {
+      return { value: 0, unit: "now" };
+    }
+
+    const minuteMs = 60 * 1000;
+    const hourMs = 60 * minuteMs;
+    const dayMs = 24 * hourMs;
+
+    const diffMinutes = Math.floor(diffMs / minuteMs);
+    const diffHours = Math.floor(diffMs / hourMs);
+    const diffDays = Math.floor(diffMs / dayMs);
+
+    // < 1 minute
+    if (diffMinutes < 1) {
+      return { value: 0, unit: "now" };
+    }
+
+    // Minutes
+    if (diffMinutes < 60) {
+      return { value: diffMinutes, unit: "minute" };
+    }
+
+    // Hours
+    if (diffHours < 24) {
+      return { value: diffHours, unit: "hour" };
+    }
+
+    // Days up to and including 10
+    if (diffDays <= 10) {
+      return { value: diffDays, unit: "day" };
+    }
+
+    // More than 10 days: return localized date string
+    const formatted = date.toLocaleDateString();
+    return { value: formatted, unit: "date" };
+  }
+
 }

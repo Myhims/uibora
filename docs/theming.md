@@ -12,6 +12,7 @@ You can easily customize the look and feel of your application by overriding the
     --uib-font-family: "Roboto", "Helvetica", "Arial", sans-serif;  /* Base font family */
     --uib-color-error: 221, 29, 29;                                 /* Color for error elements */
     --uib-disabled-color: 235, 235, 235;                            /* Color for disbaled elements */
+    --uib-color-background-panel: 50, 50, 50;                       /* Color for panels backgrounds */
 }
 ```
 
