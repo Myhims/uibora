@@ -1,0 +1,89 @@
+$disable-color: color-mix(in srgb, rgb(var(--uib-color-primary)) 40%, white 60%);
+
+.switch {
+    display: inline-block;
+    box-shadow: 3px 0 5px rgba(0, 0, 0, .3) inset;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    height: 40px;
+    width: 72px;
+    transition: all .2s;
+    background-color: $disable-color;
+
+    &--is-readonly {
+        pointer-events: none;
+        filter: grayscale(100%);
+    }
+
+    &--size-small {
+        height: 26px;
+        width: 50px;
+
+        .switch {
+            &__thumb {
+                width: 22px;
+                height: 22px;
+                left: 2px;
+                top: 2px;
+
+                &__content__icon {
+                    height: 6px;
+                    width: 6px;
+                }
+            }
+        }
+
+        &.switch--state-checked {
+            .switch__thumb {
+                left: calc(100% - 24px);
+            }
+        }
+    }
+
+    &--state-checked {
+        box-shadow: -3px 0 8px rgba(0, 0, 0, .5) inset;
+        background-color: rgb(var(--uib-color-primary));
+
+        .switch__thumb {
+            left: calc(100% - 35px);
+
+            &__content__icon {
+                width: 0;
+                border: 2px solid rgb(var(--uib-color-primary));
+            }
+        }
+    }
+
+    &__thumb {
+        box-shadow: 0 0 3px rgba(0, 0, 0, .5);
+        transition: all .2s;
+        left: 5px;
+        top: 5px;
+        position: absolute;
+        border-radius: 25px;
+        transition: all .2s;
+        background: #fff;
+        width: 30px;
+        height: 30px;
+
+        &__content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+
+            &__icon {
+                transition: all .3s;
+                border-radius: 50px;
+                border: 2px solid $disable-color;
+                height: 10px;
+                width: 10px;
+            }
+        }
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+}

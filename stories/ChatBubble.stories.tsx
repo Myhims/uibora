@@ -82,14 +82,14 @@ export const Many: Story = {
       <ChatBubble user={{ firstName: 'Victoria', lastName: 'Jefferson' }} position='left' createdOn={DatesHelper.addHours(new Date(), -2)} i18nDurationAdapter={i18nAdapter}>
         So… particles can be in two places at the same time? Is that true or just a myth?
       </ChatBubble>
-      <ChatBubble user={{ firstName: 'Gordon', lastName: 'Griffin' }} position='right' createdOn={DatesHelper.addMinutes(new Date(), -30)} i18nDurationAdapter={i18nAdapter}
+      <ChatBubble user={{ firstName: 'Gordon', lastName: 'Griffin' }} position='right' createdOn={DatesHelper.addMinutes(new Date(), -42)} i18nDurationAdapter={i18nAdapter}
         footer={<div style={{ fontSize: 9, textAlign: 'right' }}>Modified</div>} backgroundColor='rgba(var(--uib-color-primary), .1)'>
         It’s true in a certain sense. We call it superposition: a particle can exist in multiple states simultaneously until it’s measured. It’s one of the most counterintuitive concepts!
       </ChatBubble>
-      <ChatBubble user={{ firstName: 'Lola', lastName: 'Carrey' }} position='left' createdOn={DatesHelper.addMinutes(new Date(), -1)} i18nDurationAdapter={i18nAdapter}>
+      <ChatBubble user={{ firstName: 'Lola', lastName: 'Carrey' }} position='left' createdOn={DatesHelper.addMinutes(new Date(), -6)} i18nDurationAdapter={i18nAdapter}>
         And Schrödinger’s cat, is that related to this?
       </ChatBubble>
-      <ChatBubble user={{ firstName: 'Victoria', lastName: 'Jefferson' }} position='left' createdOn={DatesHelper.addHours(new Date(), -2)} i18nDurationAdapter={i18nAdapter} >
+      <ChatBubble user={{ firstName: 'Victoria', lastName: 'Jefferson' }} position='left' createdOn={DatesHelper.addMinutes(new Date(), -1)} i18nDurationAdapter={i18nAdapter} >
         Ahaha, asking good questions ^^
       </ChatBubble>
       <ChatBubble user={{ firstName: 'Gordon', lastName: 'Griffin' }} position='right' createdOn={new Date()} i18nDurationAdapter={i18nAdapter} backgroundColor='rgba(var(--uib-color-primary), .1)'>
