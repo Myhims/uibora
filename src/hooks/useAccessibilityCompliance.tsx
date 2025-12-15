@@ -3,10 +3,11 @@ import { type DependencyList, useEffect, useRef } from 'react';
 
 type AccessibilityComplianceHookOptions = {
     role?: string
+    readonly?: boolean
 };
 
 const useAccessibilityCompliance = <T extends HTMLElement>(
-    { role = 'link' }: AccessibilityComplianceHookOptions = {},
+    { role = 'link', readonly = false }: AccessibilityComplianceHookOptions = {},
     dependencies?: DependencyList
 ) => {
     const elementRef = useRef<T | null>(null);
@@ -16,8 +17,11 @@ const useAccessibilityCompliance = <T extends HTMLElement>(
         if (!el) return;
 
         // Accessibility
-        el.setAttribute('tabindex', '0');
+        el.setAttribute('tabindex', readonly ? '-1' : '0');
         el.setAttribute('role', role);
+        el.setAttribute('aria-readonly', `${readonly}`);
+        el.style.pointerEvents = readonly ? 'none' : '';
+        el.style.filter = readonly ? 'grayscale(80%)' : '';
 
         // Ensure ripple container (and remember previous styles to restore on cleanup)
         const prevPosition = getComputedStyle(el).position;

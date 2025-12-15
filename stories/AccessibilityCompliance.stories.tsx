@@ -5,18 +5,21 @@ import useAccessibilityCompliance from '../src/hooks/useAccessibilityCompliance'
 const RippleButton: React.FC = () => {
   const uac1 = useAccessibilityCompliance<HTMLDivElement>({ role: 'button' }, []);
   const uac2 = useAccessibilityCompliance<HTMLInputElement>({ role: 'button' }, []);
+  const uac3 = useAccessibilityCompliance<HTMLInputElement>({ role: 'button', readonly: true }, []);
 
   const btnStyles = {
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '15px 20px',
-        background: 'rgb(224, 224, 224)',
-        cursor: 'pointer',
-        userSelect: 'none',
-        fontSize: '16px',
-        borderRadius: 5
-      } as CSSProperties;
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '15px 20px',
+    color: 'rgb(var(--uib-color-text))',
+    background: 'rgba(var(--uib-color-primary), .2)',
+    border: '2px solid rgba(var(--uib-color-primary), .3)',
+    cursor: 'pointer',
+    userSelect: 'none',
+    fontSize: '16px',
+    borderRadius: 5
+  } as CSSProperties;
 
   return <div style={{ fontFamily: 'var(--uib-font-family)', color: 'rgb(var(--uib-color-text));', display: 'flex', gap: '1em' }}>
     <div
@@ -30,6 +33,12 @@ const RippleButton: React.FC = () => {
       style={btnStyles}
     >
       Button 2
+    </div>    
+    <div
+      {...uac3}
+      style={btnStyles}
+    >
+      Button 3 readonly
     </div>
   </div>
 };
@@ -47,8 +56,8 @@ const meta: Meta<typeof RippleButton> = {
         code: `import React from 'react';
 import useAccessibilityCompliance from 'uibora/hooks;
 
-export const MyComponent = () => {
-  const uac = useAccessibilityCompliance<HTMLDivElement>({ role: 'button' });
+export const MyComponent = ({ readonly }) => {
+  const uac = useAccessibilityCompliance<HTMLDivElement>({ role: 'button', readonly }, [readonly]);
 
   const handleClick = () => {
     //do something on click

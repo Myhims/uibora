@@ -1,0 +1,23 @@
+.rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6;
+
+    &__item {
+        appearance: none;
+        background: transparent;
+        border: none;
+        padding: 2px;
+        line-height: 0;
+        outline-offset: 2;
+
+        &__star {
+            transition: all .2s;
+            transform-origin: 50% 50%;
+
+            &:hover {
+                transform: scale(1.3);
+            }
+        }
+    }
+}

@@ -11,11 +11,6 @@ $disable-color: color-mix(in srgb, rgb(var(--uib-color-primary)) 40%, white 60%)
     transition: all .2s;
     background-color: $disable-color;
 
-    &--is-readonly {
-        pointer-events: none;
-        filter: grayscale(100%);
-    }
-
     &--size-small {
         height: 26px;
         width: 50px;
