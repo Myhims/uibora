@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState, type ReactNode } from "react"
 import ReactDOM from 'react-dom'
 import { v4 as uuidv4 } from 'uuid'
-import DatesHelper from "../../helpers/DatesHelper"
+import { DatesHelper } from "../../helpers/DatesHelper"
 import { WeekDay } from "../../models/WeekDay"
 import { Tooltip } from "../../simple"
 import { CalendarHelper } from "./CalendarHelper"

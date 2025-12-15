@@ -1,4 +1,4 @@
-export class Stringhelper {
+export class StringHelper {
     /** Compute a simple deterministic hash from a string */
     public static stringHash(input: string): number {
         let hash = 0;

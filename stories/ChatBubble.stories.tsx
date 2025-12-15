@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import DatesHelper, { type HumanReadableTime } from '../src/helpers/DatesHelper';
+import { DatesHelper, type HumanReadableTime } from '../src/helpers/DatesHelper';
 import ChatBubble from '../src/simple/ChatBubble';
 import type { IUserBubbleProps } from '../src/simple/UserBubble';
 

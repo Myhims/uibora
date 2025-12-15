@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { HtmlHTMLAttributes, ReactNode } from 'react';
-import DatesHelper, { type HumanReadableTime } from '../helpers/DatesHelper';
+import { DatesHelper, type HumanReadableTime } from '../helpers/DatesHelper';
 import s from './ChatBubble.module.scss';
 import Tooltip from './Tooltip';
 import { UserBubble, type IUserBubbleProps } from './UserBubble';

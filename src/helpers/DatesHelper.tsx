@@ -5,8 +5,7 @@ export interface HumanReadableTime {
   unit: TimeUnit;
 }
 
-
-export default class DatesHelper {
+export class DatesHelper {
     public static isCurrentDay(isoDate: string | null, day: Date): boolean {
         let iso = DatesHelper.isoToDate(isoDate);
         let result = (iso?.getFullYear() === day.getFullYear() && iso?.getMonth() === day.getMonth() && iso?.getDate() === day.getDate());

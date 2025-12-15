@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { type HTMLAttributes, type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { BrowserHelper } from '../helpers/BrowserHelper';
+import { useAccessibilityCompliance } from '../hooks';
 import s from './LargeSlider.module.scss';
 
 export interface ISliderProps extends HTMLAttributes<HTMLDivElement> {
@@ -41,6 +42,8 @@ const Slider = ({
     const sliderRef = useRef<HTMLDivElement>(null);
     const sliderContentRef = useRef<HTMLDivElement>(null);
     const sliderChildren = useRef<HTMLDivElement>(null);
+    const previousUac = useAccessibilityCompliance<HTMLDivElement>({ role: 'button' }, [scrollAmount]);
+    const nextUac = useAccessibilityCompliance<HTMLDivElement>({ role: 'button' }, [scrollAmount]);
 
     let _domInterval: any;
     let _updateScroll: any;
@@ -168,11 +171,13 @@ const Slider = ({
         {showButtons &&
             <div className={s['large-slider__buttons']}>
                 <div className={clsx(s['large-slider__buttons__previous'], previousButtonState)}
-                    onClick={slidePrevious}>
+                    onClick={slidePrevious}
+                    {...previousUac}>
                     {previousButton}
                 </div>
                 <div className={clsx(s['large-slider__buttons__next'], nextButtonState)}
-                    onClick={slideNext}>
+                    onClick={slideNext}
+                    {...nextUac}>
                     {nextButton}
                 </div>
             </div>

@@ -8,5 +8,4 @@ export class NumberHelper {
         if (min > max) [min, max] = [max, min]; // swap if boundaries are inverted
         return Math.min(Math.max(value, min), max);
     }
-
 }

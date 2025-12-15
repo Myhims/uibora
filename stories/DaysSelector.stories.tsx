@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import DatesHelper from '../src/helpers/DatesHelper';
+import { DatesHelper } from '../src/helpers/DatesHelper';
 import DaysSelector from '../src/planner/Schedulder/DaysSelector';
 
 const meta: Meta<typeof DaysSelector> = {

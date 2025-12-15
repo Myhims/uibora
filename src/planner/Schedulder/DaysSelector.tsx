@@ -1,7 +1,8 @@
 ﻿import clsx from 'clsx';
 import React, { useEffect, useRef, useState, type JSX, type ReactNode } from 'react';
 import { ColorHelper } from '../../helpers/ColorHelper';
-import DatesHelper from '../../helpers/DatesHelper';
+import { DatesHelper } from '../../helpers/DatesHelper';
+import { useAccessibilityCompliance } from '../../hooks';
 import Tooltip from '../../simple/Tooltip';
 import s from './DaysSelector.module.scss';
 import DaysSelectorHelper, { END_HOUR_MORNING, RequestPeriod } from './helpers/DaysSelectorHelper';
@@ -150,6 +151,8 @@ export const DaysSelector = ({
     const [selectionInProgress, setSelectionInProgress] = useState<ISelection | undefined>(undefined);
     const [selections, setSelections] = useState<ISelection[] | undefined>(unManagedSelections);
     let captureWhell = useRef<boolean>(false);
+    const previousUac = useAccessibilityCompliance<HTMLDivElement>({ role: 'button' }, []);
+    const nextUac = useAccessibilityCompliance<HTMLDivElement>({ role: 'button' }, []);
 
     useEffect(() => {
         const handleWheel = (e: WheelEvent) => {
@@ -469,8 +472,8 @@ export const DaysSelector = ({
                 {renderHeader()}
                 {renderMonths()}
                 <div className={s['days-selector__move-icons']}>
-                    <div onDoubleClick={(e) => handleMonthSelectionChange(-1, e)} onClick={(e) => handleMonthSelectionChange(-1, e)} >{previousButton}</div>
-                    <div onDoubleClick={(e) => handleMonthSelectionChange(1, e)} onClick={(e) => handleMonthSelectionChange(1, e)} >{nextButton}</div>
+                    <div onDoubleClick={(e) => handleMonthSelectionChange(-1, e)} onClick={(e) => handleMonthSelectionChange(-1, e)} {...previousUac}>{previousButton}</div>
+                    <div onDoubleClick={(e) => handleMonthSelectionChange(1, e)} onClick={(e) => handleMonthSelectionChange(1, e)} {...nextUac}>{nextButton}</div>
                 </div>
             </div>
         </div>

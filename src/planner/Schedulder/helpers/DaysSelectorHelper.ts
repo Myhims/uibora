@@ -1,4 +1,4 @@
-﻿import DatesHelper from "../../../helpers/DatesHelper";
+﻿import { DatesHelper } from "../../../helpers/DatesHelper";
 
 export const START_HOUR_MORNING = 8;
 export const END_HOUR_MORNING = 12;

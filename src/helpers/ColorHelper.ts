@@ -1,5 +1,5 @@
 import { NumberHelper } from "./NumberHelper";
-import { Stringhelper } from "./StringHelper";
+import { StringHelper } from "./StringHelper";
 
 /**
  * Utility class for color conversions.
@@ -68,7 +68,7 @@ export class ColorHelper {
 
     /** Generate HSL color textes */
     public static textsToHsl(text: string): { h: number; s: number; l: number } {
-        const base = Stringhelper.stringHash(text);
+        const base = StringHelper.stringHash(text);
         const h = base % 360;
         const s = 55;
         const l = 55;

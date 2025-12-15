@@ -26,7 +26,6 @@ const Switch = ({
     const uac = useAccessibilityCompliance<HTMLDivElement>({ role: 'button' });
 
     const toogleState = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        console.log('switch');
         onSwitchToggle && onSwitchToggle(!checked);
 
         if (onChange) {

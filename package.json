@@ -44,6 +44,16 @@
       "types": "./dist/types/simple/index.d.ts",
       "import": "./dist/uib.simple.js",
       "require": "./dist/uib.simple.cjs"
+    },
+    "./hooks": {
+      "types": "./dist/types/hooks/index.d.ts",
+      "import": "./dist/uib.hooks.js",
+      "require": "./dist/uib.hooks.cjs"
+    },
+    "./helpers": {
+      "types": "./dist/types/helpers/index.d.ts",
+      "import": "./dist/uib.helpers.js",
+      "require": "./dist/uib.helpers.cjs"
     }
   },
   "files": [
