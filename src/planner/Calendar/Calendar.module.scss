@@ -1,9 +1,10 @@
+@use '../../theme/mixins' as theme;
+
 .calendar {
     margin-left: 1px;
     margin-top: 1px;
     max-height: 100vh;
-    font-family: var(--uib-font-family);
-    color: rgb(var(--uib-color-text));
+    @include theme.default-component-font;
 
     &__mode-selector {
         display: flex;

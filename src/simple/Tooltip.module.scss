@@ -1,9 +1,20 @@
+@use '../theme/mixins' as theme;
+$tooltip-bg-color : color-mix(in oklab, rgb(var(--uib-color-primary)) 40%, #333 60%);
+
+%arrow {
+  content: "";
+  position: absolute;
+  border-width: 8px;
+  border-style: solid;
+}
+
+
 .tooltip {
-  font-family: var(--uib-font-family);
-  background-color: #333;
-  color: #fff;
+  @include theme.default-component-font;
+  background-color: $tooltip-bg-color;
+  color: rgb(var(--uib-color-primary-foreground));
   padding: 6px 10px;
-  border-radius: 4px;
+  border-radius: var(--uib-material-border-radius-small);
   font-size: 14px;
   white-space: nowrap;
   position: fixed;
@@ -13,53 +24,41 @@
 
   &--state-bottom {
     &:before {
-      content: "";
-      position: absolute;
+      @extend %arrow;
       top: -13px;
       left: 50%;
       transform: translateX(-50%);
-      border-width: 8px;
-      border-style: solid;
-      border-color: transparent transparent #333 transparent;
+      border-color: transparent transparent $tooltip-bg-color transparent;
     }
   }
 
   &--state-top {
     &:before {
-      content: "";
-      position: absolute;
-      bottom: -13px; // flèche sous la div
+      @extend %arrow;
+      bottom: -13px;
       left: 50%;
       transform: translateX(-50%);
-      border-width: 8px;
-      border-style: solid;
-      border-color: #333 transparent transparent transparent;
+      border-color: $tooltip-bg-color transparent transparent transparent;
     }
   }
 
   &--state-left {
     &:before {
-      content: "";
-      position: absolute;
+      @extend %arrow;
       top: 50%;
-      right: -13px; // flèche à droite
+      right: -13px;
       transform: translateY(-50%);
-      border-width: 8px;
-      border-style: solid;
-      border-color: transparent transparent transparent #333;
+      border-color: transparent transparent transparent $tooltip-bg-color;
     }
   }
 
   &--state-right {
     &:before {
-      content: "";
-      position: absolute;
+      @extend %arrow;
       top: 50%;
-      left: -13px; // flèche à gauche
+      left: -13px;
       transform: translateY(-50%);
-      border-width: 8px;
-      border-style: solid;
-      border-color: transparent #333 transparent transparent;
+      border-color: transparent $tooltip-bg-color transparent transparent;
     }
   }
 }

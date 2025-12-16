@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import type { HtmlHTMLAttributes } from "react";
-import { SplitButtonSize } from "../../buttons/models/SplitButtonSize";
+import { ButtonSize } from "../../buttons/models/ButtonSize";
 import SplitButton from "../../buttons/SplitButton";
 import { WeekDay } from "../../models/WeekDay";
 import s from './Calendar.module.scss';
@@ -34,7 +34,7 @@ const Calendar = ({
             <SplitButton
                 activeTab={0}
                 className="custom"
-                size={SplitButtonSize.small}
+                size={ButtonSize.small}
             >
                 <SplitButton.Action title="Month" onClick={() => console.log('Month')} />
                 <SplitButton.Action title="Week" onClick={() => console.log('Week')} />

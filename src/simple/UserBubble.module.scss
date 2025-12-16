@@ -1,3 +1,5 @@
+@use '../theme/mixins' as theme;
+
 .user-bubble {
     /* Use CSS custom properties to control layout and colors from the component */
     --user-bubble-size: 32px;
@@ -6,7 +8,7 @@
     --user-bubble-font-size: 14px;
     --user-bubble-ring: 0px;
 
-    font-family: var(--uib-font-family);
+    @include theme.default-component-font;
     width: var(--user-bubble-size);
     height: var(--user-bubble-size);
     border-radius: 50%;

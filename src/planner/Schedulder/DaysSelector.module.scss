@@ -1,9 +1,10 @@
-﻿$day-color: #F2F4F680;
+﻿@use '../../theme/mixins' as theme;
+
+$day-color: #F2F4F680;
 $day-size: 32px;
 
 .days-selector {
-    font-family: var(--uib-font-family);
-    color: rgb(var(--uib-color-text));
+    @include theme.default-component-font;
 
     &__year-separator {
         margin-top: 3px;
@@ -168,17 +169,17 @@ $day-size: 32px;
 
                 &--state-start {
                     background: rgb(var(--uib-selection-color));
-                    border-radius: 5px 0 0 5px;
+                    border-radius: var(--uib-material-border-radius-small) 0 0 var(--uib-material-border-radius-small);
                 }
 
                 &--state-finish {
                     background: rgb(var(--uib-selection-color));
-                    border-radius: 0 5px 5px 0;
+                    border-radius: 0 var(--uib-material-border-radius-small) var(--uib-material-border-radius-small) 0;
                 }
 
                 &--state-full {
                     background: rgb(var(--uib-selection-color));
-                    border-radius: 5px;
+                    border-radius: var(--uib-material-border-radius-small);
                 }
 
                 &--state-off {

@@ -1,7 +1,8 @@
+@use '../theme/mixins' as theme;
+
 .chat-bubble {
+    @include theme.default-component-font;
     --background-color-bubble: rgba(var(--uib-color-background-panel), .08);
-    font-family: var(--uib-font-family);
-    color: rgb(var(--uib-color-text));
     display: flex;
     gap: .5em;
     margin: .25em 0;
@@ -29,7 +30,7 @@
     }
 
     &__content {
-        border-radius: 8px;
+        border-radius: var(--uib-material-border-radius-medium);
         padding: 1em;
         background: var(--background-color-bubble);
         display: flex;

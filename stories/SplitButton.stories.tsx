@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import SplitButton from '../src/buttons/SplitButton';
-import { SplitButtonSize } from '../src/buttons/models/SplitButtonSize';
+import { ButtonSize } from '../src/buttons/models/ButtonSize';
 
 const meta = {
   title: 'Buttons/Split Button',
@@ -10,7 +10,7 @@ const meta = {
     docs: {
       source: {
         transform: (source: string) => {
-          const importLine = `import SplitButton, { SplitButtonSize } from 'uibora/buttons';`;
+          const importLine = `import SplitButton, { ButtonSize } from 'uibora/buttons';`;
           return source.includes('import SplitButton') ? source : `${importLine}\n\n${source}`;
         },
         language: 'tsx',
@@ -30,7 +30,7 @@ export const Medium: Story = {
     <SplitButton
       activeTab={0}
       className="custom"
-      size={SplitButtonSize.medium}
+      size={ButtonSize.medium}
     >
       <SplitButton.Action title="Month" onClick={() => console.log('Month')} />
       <SplitButton.Action title="Week" onClick={() => console.log('Week')} />
@@ -44,7 +44,7 @@ export const Small: Story = {
     <SplitButton
       activeTab={0}
       className="custom"
-      size={SplitButtonSize.small}
+      size={ButtonSize.small}
     >
       <SplitButton.Action title="Month" onClick={() => console.log('Month')} />
       <SplitButton.Action title="Week" onClick={() => console.log('Week')} />

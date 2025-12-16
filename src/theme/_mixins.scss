@@ -1,0 +1,5 @@
+@mixin default-component-font {
+    font-family: var(--uib-font-family);
+    color: rgb(var(--uib-color-text));
+    fill: rgb(var(--uib-color-text));
+}

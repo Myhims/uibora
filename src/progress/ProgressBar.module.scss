@@ -1,7 +1,9 @@
+@use '../theme/mixins' as theme;
+
 .progress-bar {
     position: relative;
     overflow: hidden;
-    font-family: var(--uib-font-family);
+    @include theme.default-component-font;
 
     &--style-round {
         border-radius: 100dvh;

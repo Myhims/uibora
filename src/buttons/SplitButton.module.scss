@@ -1,5 +1,7 @@
+@use '../theme/mixins' as theme;
+
 .split-button {
-    font-family: var(--uib-font-family);
+    @include theme.default-component-font;
     display: flex;
     flex-direction: row;
     justify-content: center;
