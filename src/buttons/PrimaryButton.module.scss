@@ -1,0 +1,29 @@
+@use '../theme/mixins' as theme;
+
+.primary-button {
+    @include theme.default-component-font;
+    border: none;
+    background: var(--uib-primary-button-color);
+    padding: .5em 1.5em;
+    color: rgb(var(--uib-color-primary-foreground));
+    font-size: 1rem;
+    transition: background .3s, box-shadow .3s;
+    box-shadow: none;
+    border-radius: var(--uib-primary-button-radius);
+
+    &--size-small {
+        padding: .4em 1.2em;
+        font-size: .9rem;
+    }
+
+
+    &:hover {
+        background: color-mix(in srgb, var(--uib-primary-button-color) 80%, #000 20%);
+        box-shadow: 0 0 5px rgba(255, 255, 255, .2) inset;
+    }
+
+    &:active {
+        background: color-mix(in srgb, var(--uib-primary-button-color) 75%, #000 25%);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .3) inset;
+    }
+}

@@ -1,13 +1,23 @@
 
 import { type DependencyList, useEffect, useRef } from 'react';
 
-type AccessibilityComplianceHookOptions = {
+export type AccessibilityComplianceHookOptions = {
+    /** The role to apply to the element. */
     role?: string
+    /** Sets the element to read-only: adds ARIA attributes, disables interaction, and applies a gray style. */
     readonly?: boolean
+    /** The color of the ripple effect when the element is clicked. */
+    rippleColor?: string
+    /** The detection area size for the ripple effect. If the ripple size is smaller than this value, it will overflow the component. */
+    rippleOverflowAreaSize?: number
 };
 
-const useAccessibilityCompliance = <T extends HTMLElement>(
-    { role = 'link', readonly = false }: AccessibilityComplianceHookOptions = {},
+const useAccessibilityCompliance = <T extends HTMLElement>({
+    role = 'link',
+    readonly = false,
+    rippleColor = 'rgba(var(--uib-color-primary), .7)',
+    rippleOverflowAreaSize = 34
+}: AccessibilityComplianceHookOptions = {},
     dependencies?: DependencyList
 ) => {
     const elementRef = useRef<T | null>(null);
@@ -35,7 +45,7 @@ const useAccessibilityCompliance = <T extends HTMLElement>(
         // We will toggle overflow depending on the size
         const ensureOverflowPolicy = () => {
             const rect = el.getBoundingClientRect();
-            const tooSmall = rect.width < 34 || rect.height < 34;
+            const tooSmall = rect.width < rippleOverflowAreaSize || rect.height < rippleOverflowAreaSize;
             el.style.overflow = tooSmall ? 'visible' : 'hidden';
             if (tooSmall) {
                 el.style.zIndex = el.style.zIndex || '0';
@@ -56,8 +66,7 @@ const useAccessibilityCompliance = <T extends HTMLElement>(
         el.appendChild(rippleHost);
 
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const RIPPLE_COLOR = 'rgba(var(--uib-color-primary), .7)';
-        const RIPPLE_DURATION_MS = 550;
+        const animationDuration = 550;
 
         const spawnRipple = (localX: number, localY: number, rect: DOMRect) => {
             if (prefersReduced) return;
@@ -72,10 +81,10 @@ const useAccessibilityCompliance = <T extends HTMLElement>(
             ripple.style.width = ripple.style.height = `${radius * 2}px`;
             ripple.style.left = `${localX - radius}px`;
             ripple.style.top = `${localY - radius}px`;
-            ripple.style.backgroundColor = RIPPLE_COLOR;
+            ripple.style.backgroundColor = rippleColor;
             ripple.style.opacity = '0.16';
             ripple.style.transform = 'scale(0)';
-            ripple.style.transition = `transform ${RIPPLE_DURATION_MS}ms ease-out, opacity ${RIPPLE_DURATION_MS}ms ease-out`;
+            ripple.style.transition = `transform ${animationDuration}ms ease-out, opacity ${animationDuration}ms ease-out`;
             rippleHost.appendChild(ripple);
 
             // Force layout, then animate

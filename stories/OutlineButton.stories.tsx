@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import PrimaryButton from '../src/buttons/PrimaryButton';
+import OutlineButton from '../src/buttons/OutlineButton';
 
-const meta: Meta<typeof PrimaryButton> = {
-  title: 'Buttons/Primary Button',
-  component: PrimaryButton,
+const meta: Meta<typeof OutlineButton> = {
+  title: 'Buttons/Outline Button',
+  component: OutlineButton,
   tags: ['autodocs'],
   argTypes: {
     radius: {
@@ -19,8 +19,8 @@ const meta: Meta<typeof PrimaryButton> = {
     docs: {
       source: {
         transform: (source: string) => {
-          const importLine = `import PrimaryButton from 'uibora/buttons';`;
-          return source.includes('import PrimaryButton') ? source : `${importLine}\n\n${source}`;
+          const importLine = `import OutlineButton from 'uibora/buttons';`;
+          return source.includes('import OutlineButton') ? source : `${importLine}\n\n${source}`;
         },
         language: 'tsx',
       },
@@ -29,7 +29,7 @@ const meta: Meta<typeof PrimaryButton> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof PrimaryButton>;
+type Story = StoryObj<typeof OutlineButton>;
 
 export const Default: Story = {
   args: {

@@ -1,0 +1,33 @@
+@use '../theme/mixins' as theme;
+
+.primary-button {
+    @include theme.default-component-font;
+    border: none;
+    background: rgb(var(--uib-color-background-light-button));
+    padding: .5em 1.5em;
+    color: var(--uib-primary-button-color);
+    font-size: 1rem;
+    transition: background .3s, box-shadow .3s, border .3s;
+    box-shadow: none;
+    border-radius: var(--uib-primary-button-radius);
+    border: 2px solid var(--uib-primary-button-color);
+
+    &--size-small {
+        padding: .4em 1.2em;
+        font-size: .9rem;
+    }
+
+    &:hover {
+        background: color-mix(in srgb, var(--uib-primary-button-color) 15%, rgb(var(--uib-color-background-light-button)) 85%);
+        box-shadow: 0 0 5px rgba(255, 255, 255, .2) inset;
+        border-color: color-mix(in srgb, var(--uib-primary-button-color) 80%, #333 20%);
+        color: color-mix(in srgb, var(--uib-primary-button-color) 80%, #333 20%);
+    }
+
+    &:active {
+        background: color-mix(in srgb, var(--uib-primary-button-color) 20%, rgb(var(--uib-color-background-light-button)) 80%);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2) inset;
+        border-color: color-mix(in srgb, var(--uib-primary-button-color) 80%, #333 20%);
+        color: color-mix(in srgb, var(--uib-primary-button-color) 80%, #333 20%);
+    }
+}

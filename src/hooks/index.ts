@@ -1,2 +1,2 @@
-export { default as useAccessibilityCompliance } from './useAccessibilityCompliance';
+export { default as useAccessibilityCompliance, type AccessibilityComplianceHookOptions } from './useAccessibilityCompliance';
 

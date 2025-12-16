@@ -1,6 +1,7 @@
 %theme-material {
     --uib-material-border-radius-small: 5px;
     --uib-material-border-radius-medium: 9px;
+    --uib-material-border-radius-big: 21px;
 }
 
 %theme-light {
@@ -8,7 +9,7 @@
     --uib-color-primary: 0, 123, 255;
     --uib-color-primary-foreground: 255, 255, 255;
     --uib-color-text: 80, 80, 80;
-    --uib-color-background-split-button: 250, 250, 250;
+    --uib-color-background-light-button: 250, 250, 250;
     --uib-color-border: 200, 200, 200;
     --uib-font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     --uib-color-error: 221, 29, 29;
@@ -21,7 +22,7 @@
     --uib-color-primary: 0, 123, 255;
     --uib-color-primary-foreground: 0, 0, 0;
     --uib-color-text: 220, 220, 220;
-    --uib-color-background-split-button: 26, 27, 31;
+    --uib-color-background-light-button: 26, 27, 31;
     --uib-color-border: 70, 70, 70;
     --uib-color-error: 255, 99, 99;
     --uib-disabled-color: 55, 55, 55;
