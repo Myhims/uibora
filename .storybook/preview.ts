@@ -3,6 +3,12 @@ import type { Preview } from '@storybook/react-vite';
 import '../src/theme/uib-m3.scss';
 import './preview.scss';
 
+const getSystemTheme = (): 'light' | 'dark' => {
+  if (typeof window === 'undefined' || !window.matchMedia) return 'light';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
+
 const preview: Preview = {
   parameters: {
     backgrounds: { disable: true },
@@ -41,7 +47,7 @@ const preview: Preview = {
         light: 'light',
         dark: 'dark',
       },
-      defaultTheme: 'light',
+      defaultTheme: getSystemTheme(),
       attributeName: 'data-theme',
     }),
   ],
