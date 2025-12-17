@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import Modal, { ModalVariant } from '../src/Modals/Modal';
 import Button from '../src/buttons/Button';
+import Modal, { ModalVariant } from '../src/modals/Modal';
 
 const meta: Meta<typeof Modal> = {
   title: 'Modals/Modal',
