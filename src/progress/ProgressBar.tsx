@@ -28,7 +28,7 @@ export interface ProgressBarProps extends HtmlHTMLAttributes<HTMLDivElement> {
 
 export const ProgressBar = ({
     value = 0,
-    backgroundColor = 'rgb(var(--uib-disabled-color))',
+    backgroundColor = 'rgb(var(--uib-color-primary-foreground))',
     fillColor = 'rgb(var(--uib-color-primary))',
     autoColor = false,
     linecap = 'round',

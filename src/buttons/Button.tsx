@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { useMemo, type HtmlHTMLAttributes } from "react";
 import { useAccessibilityCompliance } from "../hooks";
-import s from './PrimaryButton.module.scss';
+import s from './Button.module.scss';
 import { ButtonSize } from "./models/ButtonSize";
 
-export interface IPrimaryButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
+export interface IButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
     /**
      * Indicates whether the button is read-only.
      * When true, the button is displayed but not interactive.
@@ -27,21 +27,27 @@ export interface IPrimaryButtonProps extends HtmlHTMLAttributes<HTMLButtonElemen
 
     /** Color of the button */
     color?: string;
+
+    /** Style of the button */
+    variant?: 'outline' | 'contained' | 'text'
 }
 
-const PrimaryButton = ({
+const Button = ({
     role,
     readonly = false,
     size = ButtonSize.medium,
     radius = 'big',
-    className,
     color = 'rgb(var(--uib-color-primary))',
+    variant = 'outline',
+    className,
     ...props
-}: IPrimaryButtonProps) => {
+}: IButtonProps) => {
+    const rippleColor = variant === 'contained' ? 'rgb(var(--uib-color-primary-foreground))' : color;
+
     const uac = useAccessibilityCompliance<HTMLButtonElement>({
         role: role ?? 'button',
         readonly,
-        rippleColor: 'rgb(var(--uib-color-primary-foreground))',
+        rippleColor: rippleColor,
         rippleOverflowAreaSize: 1,
     }, [props]);
 
@@ -59,14 +65,14 @@ const PrimaryButton = ({
     }, [radius])
 
     return <button
-        className={clsx(s['primary-button'], s[`primary-button--size-${size}`], className)}
+        className={clsx(s['button'], s[`button--variant-${variant}`], s[`button--size-${size}`], className)}
         {...props}
         {...uac}
         style={{ 
-            ['--uib-primary-button-radius' as any]: radiusSize,
-            ['--uib-primary-button-color' as any]: color
+            ['--uib-button-radius' as any]: radiusSize,
+            ['--uib-button-color' as any]: color
          }}
     />
 }
 
-export default PrimaryButton;
+export default Button;

@@ -1,0 +1,71 @@
+@use '../theme/mixins' as theme;
+
+.button {
+    @include theme.default-component-font;
+    border: none;
+    padding: .5em 1.5em;
+    font-size: 1rem;
+    transition: all .3s;
+    box-shadow: none;
+    border-radius: var(--uib-button-radius);
+
+    &--variant-contained {
+        background: var(--uib-button-color);
+        color: rgb(var(--uib-color-primary-foreground));
+
+        &:hover {
+            background: color-mix(in srgb, var(--uib-button-color) 80%, #000 20%);
+            box-shadow: 0 0 5px rgba(255, 255, 255, .2) inset;
+        }
+
+        &:active {
+            background: color-mix(in srgb, var(--uib-button-color) 75%, #000 25%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3) inset;
+        }
+    }
+
+    &--variant-outline {
+        background: rgb(var(--uib-color-background-light-button));
+        border: 2px solid var(--uib-button-color);
+        color: var(--uib-button-color);
+
+        &:hover {
+            background: color-mix(in srgb, var(--uib-button-color) 15%, rgb(var(--uib-color-background-light-button)) 85%);
+            box-shadow: 0 0 5px rgba(255, 255, 255, .2) inset;
+            border-color: color-mix(in srgb, var(--uib-button-color) 80%, #333 20%);
+            color: color-mix(in srgb, var(--uib-button-color) 80%, #333 20%);
+        }
+
+        &:active {
+            background: color-mix(in srgb, var(--uib-button-color) 20%, rgb(var(--uib-color-background-light-button)) 80%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, .2) inset;
+            border-color: color-mix(in srgb, var(--uib-button-color) 80%, #333 20%);
+            color: color-mix(in srgb, var(--uib-button-color) 80%, #333 20%);
+        }
+    }
+
+    &--variant-text {
+        background: rgb(var(--uib-color-background-light-button));
+        color: var(--uib-button-color);
+
+        &:hover {
+            background: color-mix(in srgb, var(--uib-button-color) 10%, rgb(var(--uib-color-background-light-button)) 90%);
+        }
+
+        &:active {
+            background: color-mix(in srgb, var(--uib-button-color) 15%, rgb(var(--uib-color-background-light-button)) 85%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, .1) inset;
+            color: color-mix(in srgb, var(--uib-button-color) 80%, #333 20%);
+        }
+    }
+
+    &--size-small {
+        padding: .4em 1.2em;
+        font-size: .9rem;
+    }
+
+    &--size-large {
+        padding: .5em 1.5em;
+        font-size: 1.1rem;
+    }
+}
