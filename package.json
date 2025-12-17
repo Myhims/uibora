@@ -25,6 +25,11 @@
       "import": "./dist/uib.gauge.js",
       "require": "./dist/uib.gauge.cjs"
     },
+    "./modals": {
+      "types": "./dist/types/modals/index.d.ts",
+      "import": "./dist/uib.modals.js",
+      "require": "./dist/uib.modals.cjs"
+    },
     "./planner": {
       "types": "./dist/types/planner/index.d.ts",
       "import": "./dist/uib.planner.js",

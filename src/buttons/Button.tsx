@@ -23,7 +23,7 @@ export interface IButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
      * - 'big': highly rounded corners (circular).
      * - number: custom radius in pixels (e.g., 8 for 8px).
      */
-    radius: 'small' | 'big' | number;
+    radius?: 'small' | 'big' | number;
 
     /** Color of the button */
     color?: string;

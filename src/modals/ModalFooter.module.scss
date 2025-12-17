@@ -1,0 +1,6 @@
+@use '../theme/mixins' as theme;
+
+.modal-body {
+    @include theme.default-component-font;
+    padding: 1em;
+}

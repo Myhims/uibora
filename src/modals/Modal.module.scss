@@ -1,0 +1,117 @@
+@use '../theme/mixins' as theme;
+
+.modal {
+    @include theme.default-component-font;
+    display: none;
+
+    &--state-open {
+        display: block;
+
+        .modal {
+            &__container {
+                opacity: 1;
+
+                &__panel {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            &__overlay {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+    }
+
+    &__overlay {
+        background: color-mix(in srgb, rgba(var(--uib-color-primary), .5) 30%, rgba(var(--uib-color-background-paragraph), .8) 70%);
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10000;
+        width: 100dvw;
+        height: 100dvh;
+        transition: opacity .3s;
+        pointer-events: none;
+        backdrop-filter: blur(2px);
+    }
+
+    &__container {
+        z-index: 10001;
+        opacity: 0;
+        transition: opacity .3s;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10001;
+        width: 100dvw;
+        height: 100dvh;
+        display: flex;
+        pointer-events: none;
+        justify-content: center;
+
+        &__panel {
+            transition: transform .5s, opacity .5s;
+            transform: translateY(-100dvh);
+            opacity: 0;
+            border-radius: var(--uib-material-border-radius-big);
+            background: rgb(var(--uib-color-background-paragraph));
+            max-width: calc(100dvw - 2em);
+            max-height: calc(100dvh - 2em);
+            margin: 1em;
+            color: rgb(var(--uib-color-text));
+            box-shadow: 0 10px 20px rgba(var(--uib-color-background-panel), .2);
+            border: 1px solid rgba(var(--uib-color-background-paragraph), .2);
+            pointer-events: auto;
+            min-height: 8em;
+
+            &--size-small {
+                width: 650px;
+            }
+
+            &--size-medium {
+                width: 960px;
+            }
+
+            &--size-large {
+                width: 1280px;
+            }
+
+            &--state-static-anim {
+                animation: modal-container-panel-static-clip .45s;
+            }
+        }
+
+        &--variant-v-center {
+            align-items: center;
+        }
+
+        &--variant-v-top {
+            align-items: start;
+        }
+    }
+}
+
+@keyframes modal-container-panel-static-clip {
+    0% {
+        transform: scale(100%);
+    }
+
+    25% {
+        transform: scale(99%);
+    }
+
+    50% {
+        transform: scale(100%);
+    }
+
+    75% {
+        transform: scale(99%);
+    }
+
+    100% {
+        transform: scale(100%);
+    }
+}

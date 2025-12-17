@@ -1,0 +1,28 @@
+@use '../theme/mixins' as theme;
+
+.modal-header {
+    @include theme.default-component-font;
+    padding: 1em;
+    display: flex;
+    align-items: stretch;
+
+    &__side-start {
+        flex: 0 0 24px;
+        justify-content: start;
+    }
+
+    &__side-close {
+        flex: 0 0 24px;
+        display: flex;
+        justify-content: end;
+        cursor: pointer;
+    }
+
+    &__title {
+        flex: 1 1 auto;
+        min-width: 0;
+        display: flex;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+}
