@@ -24,8 +24,10 @@ type ModalContextValue = {
     setModalOpen: (open: boolean) => void;
     setHeaderHeight: Dispatch<SetStateAction<number>>;
     setFooterHeight: Dispatch<SetStateAction<number>>;
+    modalOpen: boolean;
     headerHeight: number;
     footerHeight: number;
+    variant: ModalVariant
 };
 
 const ModalContext = createContext<ModalContextValue | null>(null);
@@ -37,7 +39,6 @@ export const useModal = () => {
     }
     return ctx;
 };
-
 
 const Modal = ({
     isOpen = false,
@@ -80,7 +81,7 @@ const Modal = ({
         document.body.style.overflow = open ? 'hidden' : '';
     }, [open]);
 
-    return <ModalContext.Provider value={{ setModalOpen, headerHeight, setHeaderHeight, footerHeight, setFooterHeight }}>
+    return <ModalContext.Provider value={{ modalOpen : open, setModalOpen, headerHeight, setHeaderHeight, footerHeight, setFooterHeight, variant }}>
         <div className={clsx('modal', open ? s['modal--state-open'] : '', className)} role="dialog">
             <div className={s['modal__overlay']} onClick={handleOverlayClick}></div>
             <div className={clsx(s['modal__container'], s[`modal__container--variant-${variant}`])}
@@ -88,7 +89,7 @@ const Modal = ({
                 <div className={clsx(s['modal__container__panel'], s[`modal__container__panel--size-${size}`], staticAnim ? s[`modal__container__panel--state-static-anim`] : '')}
                     onClick={(e) => e.stopPropagation()}
                 >
-                    {open && children}
+                    {children}
                 </div>
             </div>
         </div>

@@ -5,9 +5,10 @@ import s from './ModalFooter.module.scss';
 
 const ModalFooter = ({
     className,
+    children,
     ...props
 }: HtmlHTMLAttributes<HTMLDivElement>) => {
-    const { setFooterHeight } = useModal();
+    const { setFooterHeight, modalOpen } = useModal();
     const footerRef = useRef<HTMLDivElement | null>(null);
 
     useLayoutEffect(() => {
@@ -37,6 +38,7 @@ const ModalFooter = ({
     return <div ref={footerRef}
         className={clsx(s['modal-body'], className)}
         {...props}>
+            {modalOpen && children}
     </div>
 }
 
